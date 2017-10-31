@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="案例24BackCode.aspx.cs" Inherits="HTML5TEST.案例24BackCode" %>

@@ -1,0 +1,1 @@
+﻿ASP.NET版测试系统的详细解决方案为HTML5TEST文件夹中的HTML5TEST.sln，开发工具为Microsoft Visual Studio 2010或更高版本，开发语言为ASP.NET(C#)，本文件夹中的文件为第七章案例23中的ASP.NET版测试系统中的源代码文件，供没有Microsoft Visual Studio 2010开发工具的读者学习之用。

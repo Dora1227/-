@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作动态折线图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.line.js"></script>
+<script>
+function window_onload()
+{
+    d1 = [];//存放上部折线图使用数据的数组
+    d2 = [];//存放下部折线图使用数据的数组
+    
+    // 用null值填充数组
+    for (var i=0; i< 100; ++i) 
+    {
+        d1.push(null);
+        d2.push(null);
+    }
+    //绘制折线图
+    drawGraph();
+}
+
+//设置折线图属性
+function getGraph(id, d1, d2)
+{
+    var graph = new RGraph.Line(id, d1, d2);//获取折线图数据
+    graph.Set('chart.gutter', 25);//设置标签文字使用空间
+    graph.Set('chart.title.xaxis', '时间');//设置水平坐标轴标题
+    graph.Set('chart.filled', true);//使用填充色填充折线区域
+    graph.Set('chart.fillstyle', ['#daf1fa', '#faa']);//指定上部折线区域与下部折线区域的填充色
+    graph.Set('chart.colors', ['rgb(169, 222, 244)', 'red']);//指定上部折线与下部折线的颜色
+    graph.Set('chart.linewidth', 3);//指定线宽
+    graph.Set('chart.ymax', 20);//指定垂直坐标轴上的最大数值
+    graph.Set('chart.xticks', 25);//指定水平坐标轴上的刻度线
+    return graph;//返回设置好的折线图
+}
+//绘制折线图
+function drawGraph (e)
+{
+    //清除之前绘制的折线图
+    RGraph.Clear(document.getElementById("myCanvas"));
+   
+    var graph = getGraph('myCanvas', d1, d2);//获取设置好属性的折线图
+    graph.Draw();//绘制折线图
+        
+    //使用随机数字填充折线图所使用的数据数组
+    d1.push(RGraph.random(5, 10));
+    d2.push(RGraph.random(5, 10));
+        
+    //如果数组已经填满，则移出数组中最前面的数字,并将数组中每个数字朝前移位
+    if (d1.length > 100) {
+        d1 = RGraph.array_shift(d1);
+        d2 = RGraph.array_shift(d2);
+    }
+    //设置每250毫秒更新折线图
+    setTimeout(drawGraph,250);
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作动态折线图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

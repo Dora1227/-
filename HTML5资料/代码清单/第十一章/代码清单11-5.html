@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作柱状图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.bar.js"></script>
+<script src="RGraph.common.context.js"></script>
+<script>
+function drawGroupedBar1()
+{
+    //清除已绘制的柱状图
+    canvas=document.getElementById("myCanvas");
+    context=canvas.getContext('2d');
+    context.clearRect(0,0,canvas.width,canvas.height); 
+
+    myGraph = new RGraph.Bar('myCanvas',[[1200,1600],[1300,1200],[1400,1200],
+     [1500,1600],[3000,1800],[1900,1200],[2000,1600],[2100,1900],
+     [2500,1100],[2700,1000],[1400,1600],[2600,1200]]);
+    //指定统计图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定柱状图图例被绘制在图例区域中
+    myGraph.Set('chart.key.position', 'graph');
+   //指定图例文字    
+    myGraph.Set('chart.key', ['长虹', '康佳']);    
+    //指定柱子颜色
+    myGraph.Set('chart.colors', ['blue', 'green']);
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels',['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字
+    myGraph.Set('chart.ylabels.specific',['3000','2500','2000','1500','1000','500']);
+    //指定在坐标轴顶部绘制说明销售台数的文字
+    myGraph.Set('chart.labels.above',true);
+    //用文字说明销售量最少的柱子
+    myGraph.Set('chart.labels.ingraph', [19,'销售最少']);
+    //指定网格自动与坐标轴单位对齐
+    myGraph.Set('chart.background.grid.autofit', true);
+    myGraph.Set('chart.background.grid.autofit.align', true);
+    //指定标签文字所使用的空间尺寸
+    myGraph.Set('chart.gutter',65); 
+    myGraph.Set('chart.contextmenu', [['在一个坐标单位上绘制多根柱子',drawGroupedBar1],
+     ['将一根柱子分为几层颜色',drawGroupedBar2]]);     
+    myGraph.Draw();  
+}
+
+function drawGroupedBar2()
+{
+    //清除已绘制的柱状图
+    canvas=document.getElementById("myCanvas");
+    context=canvas.getContext('2d');
+    context.clearRect(0,0,canvas.width,canvas.height); 
+    //绘制分组柱状图，指定数据
+    myGraph = new RGraph.Bar('myCanvas',[[1200,1600],[1300,1200],[1400,1200],
+     [1500,1600],[3000,1800],[1900,1200],[2000,1600],[2100,1900],[2500,1100],
+     [2700,1000],[1400,1600],[2600,1200]]);
+    //指定统计图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定柱状图图例被绘制在图例区域中
+    myGraph.Set('chart.key.position', 'graph');
+   //指定图例文字    
+    myGraph.Set('chart.key', ['长虹', '康佳']);    
+    //指定柱子颜色
+    myGraph.Set('chart.colors', ['blue', 'green']);
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels',['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字
+    myGraph.Set('chart.ylabels.specific',['5000','4500','4000','3500','3000','2500',
+    '2000','1500','1000','500']);
+    //指定在坐标轴顶部绘制说明销售总数量的文字
+    myGraph.Set('chart.labels.above',true); 
+   //指定网格自动与坐标轴单位对齐
+    myGraph.Set('chart.background.grid.autofit', true);
+    myGraph.Set('chart.background.grid.autofit.align', true);
+    //指定坐标轴文字的绘制空间
+    myGraph.Set('chart.gutter',65);
+    myGraph.Set('chart.grouping', 'stacked'); 
+    myGraph.Set('chart.contextmenu', [['在一个坐标单位上绘制多根柱子',drawGroupedBar1],['将一根柱子分为几层颜色',drawGroupedBar2]]);  
+    myGraph.Draw();     
+}
+</script>
+</head>  
+<body onload="drawGroupedBar1()">  
+<h1>使用RGraph插件制作柱状图</h1>  
+<canvas id="myCanvas" width="900" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html>

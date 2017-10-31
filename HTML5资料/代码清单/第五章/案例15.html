@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="UTF-8"/>  
+<title>打造你自己的视频播放器</title>  
+<style>
+div#buttonDiv{
+    width:800px;
+    display:none;
+}
+progress#playPercent{
+    width:800px;
+}
+div#progress{
+    width:800px;
+    height:20px;
+    left:0px;
+    background:#ccc;
+}
+div#progressValue{
+    width:0%;
+    height:20px;
+    background:green;
+    cursor:default;
+}
+div#showTime{
+    z-index:2;
+    display:none;
+    position:absolute;
+    font-size:10px;
+}
+canvas{
+    display:none;
+} 
+</style>
+</head>  
+<body>  
+<video id="video" src="video.webm" width="800">
+您的浏览器不支持video元素
+</video>
+<div id="buttonDiv">
+<progress id="playPercent" max=100>
+    <div id="progress">
+        <div id="progressValue"></div>
+    </div>
+</progress>
+<button id="btnPlay" onclick="PlayOrPause()" disabled/>播放</button>
+<button id="btnSpeedUp" onclick="SpeedUp()" disabled/>加速播放</button>
+<button id="btnSpeedDown" onclick="SpeedDown()" disabled/>减速播放</button>
+<button id="btnSlowPlay" onclick="SlowPlay()" disabled/>慢动作</button>
+<button id="btnMute" onclick="setMute()" disabled/>静音</button>
+<button id="btnVolumeUp" onclick="VolumeUp()" disabled/>增大音量</button>
+<button id="btnVolumeDown" onclick="VolumeDown()" disabled/>降低音量</button>
+<button id="btnPlayBack" onclick="PlayBack()" disabled/>回放</button> 
+<button id="btnCatchPicture" onclick="CatchPicture()" disabled />截图</button>
+</div>
+<div id="showTime">
+</div>
+<canvas id="canvas" width="800" height="256"></canvas>
+</body> 
+<script type="text/javascript"> 
+var speed=1;
+var volume=1;
+var muted=false;
+var direction=1; 
+var video = document.getElementById("video");
+var showTime=document.getElementById("showTime");
+var functionId;
+if(video.canPlayType)
+{
+    video.addEventListener('loadedmetadata',loadedmetadata,false);
+    video.addEventListener('ended',videoEnded,false);
+    video.addEventListener('play',videoPlay,false);
+    video.addEventListener('pause',videoPause,false);
+    video.addEventListener('timeupdate',updateProgress,false);
+    video.addEventListener("error",catchError,false);  
+    progress=document.getElementById("progress");
+    progress.onmouseover=progress_mouseover;
+    progress.onmouseout=progress_mouseout;
+    progress.onclick=progress_click;
+    playPercent=document.getElementById("playPercent");
+    playPercent.onmouseover=progress_mouseover;
+    playPercent.onmouseout=progress_mouseout;  
+    playPercent.onclick=playPercent_click;
+}
+function catchError()
+{
+    var error = video.error;  
+    switch(error.code)
+    {  
+        case 1:  
+            alert("视频的下载过程被中止。");  
+            break;  
+        case 2:  
+            alert("网络发生故障，视频的下载过程被中止。");  
+            break;  
+        case 3:  
+            alert("解码失败。");  
+            break;  
+        case 4:  
+            alert("媒体资源不可用或媒体格式不被支持。");  
+            break;  
+      }  
+} 
+
+function loadedmetadata()
+{    
+    var btnPlay=document.getElementById("btnPlay");
+    btnPlay.innerHTML="暂停";
+    btnPlay.disabled=""; 
+    video.play();  
+    var buttonDiv=document.getElementById("buttonDiv");
+    buttonDiv.style.display="block";   
+}
+function PlayOrPause()
+{
+    if(video.paused)
+    {
+       video.play();
+       video.playbackRate=speed;
+       video.muted=muted;
+       video.volume=volume;       
+    }
+    else
+        video.pause();
+
+} 
+function videoEnded(ev)
+{
+    video.currentTime=0;
+    this.pause();
+}
+function videoPlay(ev)
+{
+    var btnPlay=document.getElementById("btnPlay");
+    btnPlay.innerHTML="暂停";
+    document.getElementById("btnSpeedUp").disabled="";
+    document.getElementById("btnSpeedDown").disabled="";
+    document.getElementById("btnSlowPlay").disabled="";
+    document.getElementById("btnMute").disabled="";
+    document.getElementById("btnVolumeUp").disabled="";
+    document.getElementById("btnVolumeDown").disabled="";
+    document.getElementById("btnPlayBack").disabled="";
+    document.getElementById("btnCatchPicture").disabled="";
+    if(direction==-1)
+        functionId=setInterval(playBack1,200);     
+}
+function videoPause(ev)
+{
+    var btnPlay=document.getElementById("btnPlay");
+    btnPlay.innerHTML="播放";
+    document.getElementById("btnSpeedUp").disabled="disabled";
+    document.getElementById("btnSpeedDown").disabled="disabled";
+    document.getElementById("btnSlowPlay").disabled="disabled";
+    document.getElementById("btnMute").disabled="disabled";
+    document.getElementById("btnVolumeUp").disabled="disabled";
+    document.getElementById("btnVolumeDown").disabled="disabled";
+    document.getElementById("btnPlayBack").disabled="disabled";
+    document.getElementById("btnCatchPicture").disabled="disabled";
+    clearInterval(functionId);
+}
+function updateProgress() 
+{
+　　var value=Math.round((Math.floor(video.currentTime)/Math.floor(video.duration))*100,0);
+    var progress = document.getElementById('playPercent');
+    progress.value = value;
+    var progressValue=document.getElementById("progressValue");
+    progressValue.style.width = value+"%";    
+    showTime.innerHTML=calcTime(Math.floor(video.currentTime))+'/'+calcTime(Math.floor(video.duration));
+}
+function calcTime(time)
+{
+    var hour;
+    var minute;
+    var second;
+    hour=String(parseInt(time/3600,10));
+    if (hour.length == 1)   hour   = '0' + hour;
+    minute=String(parseInt((time%3600)/60,10));
+    if (minute.length == 1)   minute   = '0' + minute;
+    second=String(parseInt(time%60,10));
+    if (second.length == 1)   second   = '0' + second;
+    return hour+":"+minute+":"+second;
+}
+function progress_mouseover(ev)
+{
+    showTime.style.display="inline";
+    showTime.style.left=ev.pageX+5+"px";
+    showTime.style.top=ev.pageY+5+"px";
+    showTime.innerHTML=calcTime(Math.floor(video.currentTime))+'/'+calcTime(Math.floor(video.duration));
+    ev.stopPropagation();
+}
+function progress_mouseout(ev)
+{
+    showTime.style.display="none";
+    showTime.innerHTML="";
+}
+function playPercent_click(evt)
+{
+    if(evt.offsetX)
+    {
+        playPercent=document.getElementById("playPercent");
+        video.currentTime = video.duration * (evt.offsetX / playPercent.clientWidth);
+    }
+}
+function progress_click(evt)
+{
+    progress=document.getElementById("progress");
+    if(evt.offsetX)
+        video.currentTime = video.duration * (evt.offsetX /progress.clientWidth);
+    else
+        video.currentTime = video.duration * (evt.clientX /progress.clientWidth);
+}
+function SpeedUp()
+{    
+    video.playbackRate+=1;
+    speed=video.playbackRate;
+}
+function SpeedDown()
+{
+    video.playbackRate-=1;
+    if(video.playbackRate<0)
+        video.playbackRate=0;
+    speed=video.playbackRate;
+}
+function SlowPlay()
+{
+    var btnSlowPlay=document.getElementById("btnSlowPlay");    
+    if(btnSlowPlay.innerHTML=="慢动作")
+    {
+	video.playbackRate=0.5;
+        btnSlowPlay.innerHTML="正常速度";
+        document.getElementById("btnSpeedUp").disabled="disabled";
+        document.getElementById("btnSpeedDown").disabled="disabled";
+    }
+    else
+    {
+	video.playbackRate=1;
+        btnSlowPlay.innerHTML="慢动作";
+        document.getElementById("btnSpeedUp").disabled="";
+        document.getElementById("btnSpeedDown").disabled="";
+    }
+    speed=video.playbackRate;
+}
+function setMute()
+{
+    if(!video.muted)
+    {
+        video.muted=true;
+        document.getElementById("btnMute").innerHTML="取消静音";
+    }
+    else
+    {
+        video.muted=false;
+        document.getElementById("btnMute").innerHTML="静音";
+    }
+    muted=video.muted;
+}
+function VolumeUp()
+{
+    if(video.volume<1)
+        video.volume+=0.1;
+    volume=video.volume;
+}
+function VolumeDown()
+{   
+    if(video.volume>0)
+         video.volume-=0.1;
+    volume=video.volume;
+}
+function PlayBack(){
+    var playBackBtn=document.getElementById("btnPlayBack");
+    if(playBackBtn.innerHTML=="回放")
+    {
+        functionId=setInterval(playBack1,200);
+        playBackBtn.innerHTML="取消回放";
+        direction=-1;
+    }
+    else
+    {
+        clearInterval(functionId);
+        playBackBtn.innerHTML="回放";
+        direction=1;
+    }
+}
+function playBack1()
+{
+    var playBackBtn=document.getElementById("btnPlayBack");
+    if(video.currentTime==0)
+    {
+        playBackBtn.innerHTML="回放";
+        clearInterval(functionId);
+    }
+    else
+        video.currentTime-=1;
+}
+function CatchPicture()
+{
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext('2d');
+    canvas.width=video.videoWidth;
+    canvas.height=video.videoHeight;
+    ctx.drawImage(video,0,0,canvas.width,canvas.height);
+    canvas.style.display="block";
+}
+</script>  
+ </html> 

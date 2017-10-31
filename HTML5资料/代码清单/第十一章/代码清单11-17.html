@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作雷达图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.tradar.js"></script>
+<script>
+function window_onload()
+{
+    //绘制雷达图，获取数据
+    var tradar=new RGraph.Tradar('myCanvas',[12,13,14,15,29,17]);
+    //指定雷达图标题
+    tradar.Set('chart.title', '2010年常州第一百货公司彩电销售分布图');
+    //指定标签文字
+    tradar.Set('chart.labels', ['长虹（12%）', '康佳（13%）', '创维（14%）', '三星（15%）','夏普（29%）','索尼（17%）']);
+    //指定绘制背景灰色圆圈
+    tradar.Set('chart.background.circles', true);
+    //指定雷达图颜色
+    tradar.Set('chart.color', 'rgba(255,0,0,0.5)');
+    //指定中央圆圈值为5
+    tradar.Set('chart.circle',5);
+    //指定中央圆圈的填充颜色
+    tradar.Set('chart.circle.fill', 'rgba(200,255,200,0.5)');
+    //绘制雷达图
+    tradar.Draw();
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作雷达图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html>
+

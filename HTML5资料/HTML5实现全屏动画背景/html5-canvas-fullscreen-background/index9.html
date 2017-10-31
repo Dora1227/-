@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0; 
+        }
+
+        /* Demo Buttons Style */
+        .codrops-demos {
+            font-size: 0.8em;
+            text-align: center;
+            position: absolute;
+            z-index: 99;
+            width: 100%;
+            background-color: #de2910; 
+            height:auto;
+        }
+
+            .codrops-demos a {
+                display: inline-block;
+                margin: 0.35em 0.1em;
+                padding: 0.5em 1.2em;
+                outline: none;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 700;
+                border-radius: 2px;
+                font-size: 110%;
+                border: 2px solid transparent;
+                color: #fff;
+            }
+
+                .codrops-demos a:hover,
+                .codrops-demos a.current-demo {
+                    border-color: #fff;
+                }
+    </style>
+</head>
+
+<body style="margin: 0px; padding: 0px;overflow-x:hidden;">
+
+    <nav class="codrops-demos">
+        <a href="index.html">Demo 1</a>
+        <a href="index2.html">Demo 2</a>
+        <a href="index3.html">Demo 3</a>
+        <a href="index4.html">Demo 4</a>
+        <a href="index5.html">Demo 5</a>
+        <a href="index6.html">Demo 6</a>
+        <a href="index7.html">Demo 7</a>
+        <!--<a href="index8.html">Demo 8</a>-->
+        <a class="current-demo" href="index9.html">Demo 9</a>
+    </nav>
+    <canvas id="canvas"></canvas>
+    <canvas id="cavWords"></canvas>
+    <script>
+        "use strict";
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d"),
+            //canvas.width设置canvas的宽度和高度
+            w = canvas.width = window.innerWidth,
+            h = canvas.height = 1800;
+        ctx.fillStyle = "#de2910";
+        ctx.fillRect(0, 90, 700, 500);
+        //alert(Math.PI);
+        ctx.translate(30, 220);
+        ctx.rotate(Math.PI / 5);
+        var s = 80;
+        create5Star(ctx,s);
+        ctx.fill();
+
+        ctx.translate(150, -240);
+        ctx.rotate(Math.PI / 2.1);
+        var s = 30;
+        create5Star(ctx, s);
+        ctx.fill();
+
+        ctx.translate(50, -150);
+        ctx.rotate(Math.PI / 4.1);
+        var s = 30;
+        create5Star(ctx, s);
+        ctx.fill();
+
+        ctx.translate(125, -190);
+        ctx.rotate(Math.PI / 2.1);
+        var s = 30;
+        create5Star(ctx, s);
+        ctx.fill();
+
+       
+        ctx.translate(70, -180);
+        ctx.rotate(Math.PI / 1.8);
+        var s = 30;
+        create5Star(ctx, s);
+        ctx.fill();
+        ctx.save();
+       
+        function create5Star(context, size) {
+            var n = 0;
+            var dx = 100;
+            var dy = 0;
+
+            var s = size;
+            //创建路径
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(255,222,0,1)';
+            var x = Math.sin(0);
+            var y = Math.cos(0);
+            var dig = Math.PI / 5 * 4;
+            for (var i = 0; i < 5; i++) {
+                var x = Math.sin(i * dig);
+                var y = Math.cos(i * dig);
+                ctx.lineTo(dx + x * s, dy + y * s);
+
+            }
+            ctx.closePath();
+        }
+        //for (var i = 0; i < 4; i++) {
+        //    switch (i) {
+        //        case 0:
+        //            ctx.translate(65, -360);
+        //            ctx.rotate(Math.PI / 3.5);
+
+        //        case 1:
+        //            ctx.translate(60, -90);
+        //            ctx.rotate(Math.PI / 3.5);
+
+        //        case 2:
+        //            ctx.translate(80, -70);
+        //            ctx.rotate(Math.PI / 3.5);
+
+        //        case 3:
+        //            ctx.translate(100, -30);
+        //            ctx.rotate(Math.PI / 3.5);
+
+        //    }
+
+        //    var s = 50;
+        //    create5Star(ctx,s);
+        //    ctx.fill();
+        //}
+        //平移到指定位置，绘制渐变圆
+        ctx.beginPath();
+        ctx.translate(630, -261);
+        ctx.rotate(Math.PI/20);
+        var rectBg = ctx.createRadialGradient(250, 250, 0, 250, 250, 250);
+        rectBg.addColorStop(0.1, 'rgb(255,255,255)');
+        rectBg.addColorStop(0.5, 'rgb(186,186,186)');
+        rectBg.addColorStop(1, 'rgb(202,202,202)');
+        ctx.fillStyle = rectBg;
+        ctx.fillRect(0, 0, 500, 500);
+        ctx.fill();
+        ctx.save();
+        ctx.closePath();
+        //var x = "4";
+       // var y = +x + 3;//变量前面加“+”号表示将变量转换为数字类型，可进行运算，与变量*1效果相同。
+        //alert(y);
+        //绘制星球运转图
+        //var cavStar = document.getElementById("cavStar");
+        ctx.beginPath();
+        ctx.translate(-700, 461);
+        //设置运转时间
+        var time = 0;
+        //ctx.fillStyle = "rgba(0,0,0,1)";
+        //ctx.fillRect(0, 61, 700, 700);
+       
+        //绘制星球运行轨道
+        function drawTrack() {
+            for (var i = 0; i < 8; i++) {
+                //开始路径
+                ctx.beginPath();
+                //绘制同心圆环
+                ctx.arc(350, 400, (i + 1) * 40, 0, 360, false);
+                ctx.closePath();
+                ctx.strokeStyle = '#fff';
+                ctx.stroke();
+            }
+        }
+        drawTrack();
+
+        //绘制星球，实例化后能画出所有星球
+        function drawPlanet(x, y, radius, sColor, eColor, cycle) {
+            //星球属性:坐标，半径，星球渐变颜色，公转周期
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.sColor = sColor;
+            this.eColor = eColor;
+            this.cycle = cycle;
+
+            //绘制星球
+            this.draw = function () {
+                ctx.save();
+                //重设0，0坐标点,需与绘制轨道的圆心坐标一致
+                ctx.translate(350, 400);
+                //设置旋转角度
+                ctx.rotate(time * 360 / this.cycle * Math.PI / 180);
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, 360, false);
+                ctx.closePath();
+
+                //星球填充色
+                this.color = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                this.color.addColorStop(0, this.sColor);
+                this.color.addColorStop(1, this.eColor);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+
+                time +=1;                
+            }
+        }
+
+        //星球构造方法，从star中继承
+        function Sun() {
+            //call()调用一个对象的一个方法，以另一个对象替换当前对象。
+            drawPlanet.call(this,0,0,20,'#f00','#f90',0);
+        }
+        function Mercury() {
+            //y的距离与绘制轨道时每条轨道增加的间隔一致
+            drawPlanet.call(this, 0, -40, 10, '#A69697', '#5C3E40', 87.70);
+        }
+        function Venus() {
+            drawPlanet.call(this, 0, -80, 10, '#C4BBAC', '#1F1315', 224.701);
+        }
+        function Earth() {
+            drawPlanet.call(this, 0, -120, 10, '#78B1E8', '#050C12', 365.2422);
+        }
+        function Mars() {
+            drawPlanet.call(this, 0, -160, 10, '#CEC9B6', '#76422D', 686.98);
+        }
+        function Jupiter() {
+            drawPlanet.call(this, 0, -200, 10, '#C0A48E', '#322222', 4332.589);
+        }
+        function Saturn() {
+            drawPlanet.call(this, 0, -240, 10, '#F7F9E3', '#5C4533', 10759.5);
+        }
+        function Uranus() {
+            drawPlanet.call(this, 0, -280, 10, '#A7E1E5', '#19243A', 30799.095);
+        }
+        function Neptune() {
+            drawPlanet.call(this, 0, -320, 10, '#0661B2', '#1E3B73', 164.8 * 365);
+        }
+
+        //星球对象实例化
+        var sun = new Sun();
+        var water = new Mercury();
+        var gold = new Venus();
+        var earth = new Earth();
+        var fire = new Mars();
+        var wood = new Jupiter();
+        var soil = new Saturn();
+        var sky = new Uranus();
+        var sea = new Neptune();
+
+        function move() {
+            //清除画布
+            ctx.clearRect(0, 60, 720, 720);
+            ctx.fillStyle = "rgba(0,0,0,1)";
+            ctx.fillRect(0, 61, 700, 700);
+            //重新绘制一遍轨道
+            drawTrack();
+
+            sun.draw();
+            water.draw();
+            gold.draw();
+            earth.draw();
+            fire.draw();
+            wood.draw();
+            soil.draw();
+            sky.draw();
+            sea.draw();
+        }
+        setInterval(move, 100);
+        ctx.closePath();
+    </script>
+</body>
+</html>

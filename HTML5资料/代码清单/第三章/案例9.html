@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>用动画的形式装载图像</title>  
+<script type="text/javascript">
+var width,height;
+var context,image,functionId;
+var drawLeft,drawWidth;
+var drawTop,drawHeight;
+var spaceWidth,spaceHeight;
+function window_onload()
+{
+     var canvas = document.getElementById('canvas');  
+     context = canvas.getContext('2d');  
+     image = new Image(); 
+     image.src = "tyl.jpg"; 
+     width=canvas.width;
+     height=canvas.height;
+}
+function btn1_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    drawWidth=0; 
+    functionId=self.setInterval("drawImg1()",100);  
+    btnDisable();
+}  
+function drawImg1()
+{  
+    context.drawImage(image,0,0,drawWidth,image.height,0,0,drawWidth,image.height); 
+    drawWidth=drawWidth+2;
+    if(drawWidth>width)
+    {
+        window.clearInterval(functionId);  
+        btnEnable();
+    }
+}
+function btn2_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    drawHeight=0; 
+    functionId=self.setInterval("drawImg2()",100);  
+    btnDisable();
+}  
+function drawImg2()
+{  
+    context.save();
+    context.drawImage(image,0,0,image.width,drawHeight,0,0,image.width,drawHeight); 
+    drawHeight=drawHeight+2;
+    if(drawHeight>height)
+    {
+        window.clearInterval(functionId);  
+        btnEnable();
+    }
+    context.restore();
+}
+function btn3_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    drawLeft=width/2;
+    drawWidth=0; 
+    functionId=self.setInterval("drawImg3()",100);  
+    btnDisable();
+}  
+function drawImg3()
+{  
+    context.save();
+    context.drawImage(image,drawLeft,0,drawWidth,image.height,drawLeft,0,drawWidth,image.height); 
+    drawLeft=drawLeft-1;
+    drawWidth=drawWidth+2;
+    if(drawLeft<=0)
+    {
+        window.clearInterval(functionId);
+        btnEnable();
+    } 
+    context.restore();
+}
+function btn4_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    drawTop=height/2;
+    drawHeight=0; 
+    functionId=self.setInterval("drawImg4()",100);  
+    btnDisable();
+}  
+function drawImg4()
+{  
+    context.save();
+    context.drawImage(image,0,drawTop,image.width,drawHeight,0,drawTop,image.width,drawHeight); 
+    drawTop=drawTop-1;
+    drawHeight=drawHeight+2;
+    if(drawTop<=0)
+    {
+        window.clearInterval(functionId); 
+        btnEnable();
+    } 
+    context.restore();
+}
+function btn5_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    spaceWidth=width/10;
+    drawWidth=0;
+    functionId=self.setInterval("drawImg5()",100);  
+    btnDisable();
+}  
+function drawImg5()
+{  
+     for(i=0;i<10;i++)
+     {
+         context.drawImage(image,0+i*spaceWidth,0,drawWidth,image.height,0+i*spaceWidth,0,drawWidth,image.height); 
+     }
+
+    drawWidth+=1;
+   
+    if(drawWidth>spaceWidth)
+    {    
+       window.clearInterval(functionId);  
+       btnEnable();
+    }    
+}
+function btn6_onclick() 
+{     
+    context.fillStyle = "#EEEEFF";  
+    context.fillRect(0, 0,width,height);  
+    spaceHeight=height/10;
+    drawHeight=0;
+    functionId=self.setInterval("drawImg6()",100);  
+    btnDisable();
+}  
+function drawImg6()
+{  
+     context.save();
+     context.clearRect(0, 0,width,height); 
+     for(i=0;i<10;i++)
+     {
+         context.drawImage(image,0,0+i*spaceHeight,image.width,drawHeight,0,0+i*spaceHeight,image.width,drawHeight); 
+     }
+
+    drawHeight+=1;
+   
+    if(drawHeight>spaceHeight)
+    {    
+        window.clearInterval(functionId);  
+        btnEnable();
+    }    
+    context.restore();
+}
+function btnDisable()
+{
+    document.getElementById("btn1").disabled="disabled";
+    document.getElementById("btn2").disabled="disabled";
+    document.getElementById("btn3").disabled="disabled";
+    document.getElementById("btn4").disabled="disabled";
+    document.getElementById("btn5").disabled="disabled";
+    document.getElementById("btn6").disabled="disabled";
+}
+function btnEnable()
+{
+    document.getElementById("btn1").disabled="";
+    document.getElementById("btn2").disabled="";
+    document.getElementById("btn3").disabled="";
+    document.getElementById("btn4").disabled="";
+    document.getElementById("btn5").disabled="";
+    document.getElementById("btn6").disabled="";
+}
+</script>
+<style>
+article{
+    align:center;
+}
+canvas{
+    background-color:white;
+}
+div#divLeft{
+    width:150px;
+    float:left;
+}
+div#divRight{
+    float:left;
+}
+input[type='button']{
+    width:140px;
+
+}
+</style>
+</head>  
+<body onload="window_onload()">  
+<article>
+<h1>用动画的形式装载图像</h1>
+<div id="divLeft">
+<input type="button" id="btn1" value="从左往右装载" onclick="btn1_onclick()"></button>
+<input type="button" id="btn2" value="从上往下装载" onclick="btn2_onclick()"></button>
+<input type="button" id="btn3" value="横向窗帘式拉开" onclick="btn3_onclick()"></button>
+<input type="button" id="btn4" value="竖向窗帘式拉开" onclick="btn4_onclick()"></button>
+<input type="button" id="btn5" value="横向百叶窗式展开" onclick="btn5_onclick()"></button> 
+<input type="button" id="btn6" value="纵向百叶窗式展开" onclick="btn6_onclick()"></button>
+</div>
+<div id="divRight">
+<canvas id="canvas" width="100" height="130"></canvas>
+</div>
+</article>
+</body>  
+</html>

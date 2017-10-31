@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketCommon-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketServer-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketServerAPI-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketSwingGUI-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api-2.5-6.1.14.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketClientAPI-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketJavaSEClient-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jWebSocketSamples-0.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javolution-5.5.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-2-RELEASE65.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.13-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/netty-3.2.0.BETA1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.10.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-jdk14-1.5.10.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

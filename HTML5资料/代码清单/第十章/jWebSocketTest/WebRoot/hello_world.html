@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jWebSocket示例</title>
+<style>
+div#msg{
+	border: 0px; 
+	margin:10px 0px 10px 0px;
+	padding: 3px;
+	background-color: #f0f0f0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+    position:relative; 
+    height:300px; 
+    overflow:auto;
+    font-size: 14px;
+}
+</style>
+<script type="text/javascript" src="jWebSocket.js"></script>
+<script type="text/javascript" src="samplesPlugIn.js"></script>
+<script type="text/javascript" language="JavaScript">
+var jWebSocketClient;
+var userName;
+function window_onload()
+{
+    if( jws.browserSupportsWebSockets() ) {
+        jWebSocketClient = new jws.jWebSocketJSONClient();
+        jWebSocketClient.setSamplesCallbacks({OnSamplesServerTime:getServerTimeCallback});
+        document.getElementById("btnConnect").disabled="";
+    } 
+    else {
+        var lMsg = jws.MSG_WS_NOT_SUPPORTED;
+        alert( lMsg );
+    }
+}
+function btnConnect_click()
+{
+    var lURL = jws.JWS_SERVER_URL;
+    userName = document.getElementById("userName").value;
+    var userPass = document.getElementById("userPass").value;
+    var msg=document.getElementById("msg");
+    msg.innerHTML="连接到地址： " + lURL + " 并且以\"" + userName + "\"用户名与服务器建立链接..." ;
+    var lRes = jWebSocketClient.logon(lURL,userName,userPass, {
+        OnOpen: function( aEvent ) {
+            msg.innerHTML+="<br/>jWebSocket连接已建立" ;
+        },
+        OnMessage: function( aEvent, aToken ) {
+            msg.innerHTML+="<br/>jWebSocket \"" + aToken.type + "\" 令牌收到, 消息字符串为: \"" + aEvent.data + "\"" ;
+        },
+        OnClose: function( aEvent ) {
+            msg.innerHTML+="<br/>jWebSocket连接被关闭." ;
+            document.getElementById("btnbroadcastText").disabled="disabled";
+            document.getElementById("btnDisConnect").disabled="disabled";
+            document.getElementById("btnTestPlugIn").disabled="disabled";
+        }
+    });
+    msg.innerHTML+="<br/>"+jWebSocketClient.resultToString(lRes);
+    if(lRes.code==0)
+    {
+        document.getElementById("btnbroadcastText").disabled="";
+        document.getElementById("btnDisConnect").disabled="";
+        document.getElementById("btnTestPlugIn").disabled="";
+    }
+}
+function btnbroadcastText_click()
+{
+    var sendMsg=document.getElementById("sendMsg").value;
+    var msg=document.getElementById("msg");
+    msg.innerHTML+="<br/>广播消息：\""+sendMsg+"\"...";
+    var lRes = jWebSocketClient.broadcastText("",sendMsg);
+    if(lRes.code!=0)
+        msg.innerHTML=jWebSocketClient.resultToString( lRes );
+    document.getElementById("sendMsg").value="";
+}
+function btnDisConnect_click()
+{
+    if(jWebSocketClient)
+    {
+        var msg=document.getElementById("msg");
+        msg.innerHTML+="<br/>用户"+"\""+userName+"\"关闭连接";
+        var lRes=jWebSocketClient.close();
+        msg.innerHTML+="<br/>"+jWebSocketClient.resultToString( lRes );
+        if(lRes.code==0)
+        {
+            document.getElementById("btnbroadcastText").disabled="disabled";
+            document.getElementById("btnDisConnect").disabled="disabled";
+            document.getElementById("btnTestPlugIn").disabled="disabled";
+        }
+    }
+}
+function btnTestPlugIn_click()
+{
+    var msg=document.getElementById("msg");
+    msg.innerHTML+="<br/>通过WebSockets获取服务器的系统时间..." ;
+    var lRes = jWebSocketClient.requestServerTime();
+	//发生错误时显示错误消息
+    if( lRes.code != 0 ) 
+        msg.innerHTML+="<br/>"+jWebSocketClient.resultToString(lRes);
+}
+function getServerTimeCallback( aToken ) {
+    msg.innerHTML+="<br/>服务器的系统时间: " + aToken.time ;
+}
+function window_onunload()
+{
+    if(jWebSocketClient)
+    {
+        jWebSocketClient.close({timeout:3000});
+    }
+}
+
+</script>
+<body onload="window_onload()" onunload="window_onunload()">
+用&nbsp;户&nbsp;&nbsp;名：<input type="text" id="userName"><br/>
+密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="text" id="userPass"><br/>
+发送消息：<input type="text" id="sendMsg"><br/>
+<input type="button" id="btnConnect" onclick="btnConnect_click()" value="建立连接"  disabled="disabled">
+<input type="button" id="btnbroadcastText" onclick="btnbroadcastText_click()" value="广播消息" disabled="disabled">
+<input type="button" id="btnDisConnect" onclick="btnDisConnect_click()" value="关闭连接" disabled="disabled">
+<input type="button" id="btnTestPlugIn" onclick="btnTestPlugIn_click()" value="测试插件" disabled="disabled">
+<div id="msg">
+</body>

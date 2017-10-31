@@ -1,0 +1,380 @@
+﻿<html>
+<head>
+<title>对立方体绘制纹理</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script id="shader-fs" type="x-shader/x-fragment"> 
+#ifdef GL_ES
+precision highp float;
+#endif
+varying vec2 vTextureCoord;
+uniform sampler2D uSampler;
+void main(void) {
+    gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+}
+</script> 
+
+<script id="shader-vs" type="x-shader/x-vertex"> 
+attribute vec3 aVertexPosition;
+attribute vec2 aTextureCoord;
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+varying vec2 vTextureCoord;
+
+void main(void) {
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    vTextureCoord = aTextureCoord;
+}
+</script> 
+ 
+<script type="text/javascript"> 
+var gl;//WebGL上下文对象
+//初始化WebGL
+function initGL(canvas) 
+{
+    try 
+    {
+        //获取canvas元素的WebGL上下文对象
+        gl = canvas.getContext("experimental-webgl");
+        //将3D视图的宽度设置为canvas元素的宽度
+        gl.viewportWidth = canvas.width;
+        //将3D视图的高度设置为canvas元素的高度
+        gl.viewportHeight = canvas.height;
+    } 
+    catch (e) 
+    {
+    }
+    if (!gl) //初始化失败
+    {
+        alert("对不起，您不能初始化WebGL。");
+    }
+}
+//创建渲染器
+function getShader(gl, id)
+{
+    //根据id查找页面上的元素
+    var shaderScript = document.getElementById(id);
+     //如果找不到元素则返回
+    if (!shaderScript) 
+            return null;
+    //取出元素中所有内容
+    var str = "";
+    var k = shaderScript.firstChild;
+    while (k) 
+    {
+        if (k.nodeType == 3) 
+            str += k.textContent;
+
+        k = k.nextSibling;
+    }
+ 
+    var shader;
+    //如果元素类型为"x-shader/x-fragment"
+    if (shaderScript.type == "x-shader/x-fragment") 
+        //创建片元渲染器
+        shader = gl.createShader(gl.FRAGMENT_SHADER);
+    else if (shaderScript.type == "x-shader/x-vertex") 
+        //创建顶点渲染器
+        shader = gl.createShader(gl.VERTEX_SHADER);
+    //如果元素类型为其他
+    else 
+        return null;
+    //使用WebGL编译元素中内容
+    gl.shaderSource(shader, str);
+    gl.compileShader(shader);
+    //执行错误处理 
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) 
+    {
+        alert(gl.getShaderInfoLog(shader));
+        return null;
+    }
+    //返回渲染器 
+    return shader;
+}
+ 
+var shaderProgram;//程序对象
+//初始化渲染器
+function initShaders() 
+{
+    //获取片元渲染器
+    var fragmentShader = getShader(gl, "shader-fs");
+    //获取顶点渲染器
+    var vertexShader = getShader(gl, "shader-vs");
+    //创建程序对象 
+    shaderProgram = gl.createProgram();
+    //将渲染器绑定到程序对象上
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+    //如果不能初始化渲染器 
+    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) 
+        alert("不能初始化渲染器");
+
+    gl.useProgram(shaderProgram);
+    /*获取程序对象的avertexPosition属性的引用并将其保存在程序对象的
+    vertexPosition属性中*/
+    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+    //使用数组来提供vertexPositionAttribute属性的值
+    gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+    /*获取程序对象的aTextureCoord属性的引用并将其保存在程序对象的
+    textureCoord属性中*/ 
+    shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+    //使用数组来提供textureCoord属性的值
+    gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+ 
+    shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+    shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+    shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
+}
+//处理装载完毕的纹理
+function handleLoadedTexture(texture) 
+{
+    gl.bindTexture(gl.TEXTURE_2D, texture);//通知WebGLtexture为当前所使用的纹理
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);//通知WebGL垂直翻转纹理图像
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+    //指定纹理过滤的参数
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+}
+ 
+var myTexture;
+function initTexture() 
+{
+    myTexture = gl.createTexture();
+    myTexture.image = new Image();
+    myTexture.image.onload = function () {
+            handleLoadedTexture(myTexture)
+    }
+ 
+    myTexture.image.src = "texture.gif";
+}
+ 
+var mvMatrix = mat4.create();
+var mvMatrixStack = [];
+var pMatrix = mat4.create();
+//将视图-模型矩阵保存在堆栈中
+function mvPushMatrix() 
+{
+    var copy = mat4.create();
+    mat4.set(mvMatrix, copy);
+    mvMatrixStack.push(copy);
+}
+//取出堆栈中保存的视图-模型矩阵
+function mvPopMatrix() 
+{
+    if (mvMatrixStack.length == 0) 
+        throw "Invalid popMatrix!";
+
+    mvMatrix = mvMatrixStack.pop();
+}
+ 
+function setMatrixUniforms() 
+{
+    gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+    gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+}
+//将角度转变成为弧度
+function degToRad(degrees) 
+{
+    return degrees * Math.PI / 180;
+}
+ 
+var cubeVertexPositionBuffer;//立方体顶点位置缓冲区
+var cubeVertexTextureCoordBuffer;//立方体各顶点所用纹理缓冲区
+var cubeVertexIndexBuffer;//立方体元素数组缓冲区
+//初始化缓冲区
+function initBuffers() 
+{
+    //创建立方体顶点位置缓冲区
+    cubeVertexPositionBuffer = gl.createBuffer();
+    //将cubeVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+    //使用JavaScript列表定义一个立方体的一组顶点信息
+    vertices =
+    [
+        //前面
+        -1.0, -1.0,  1.0,
+        1.0, -1.0,  1.0,
+        1.0,  1.0,  1.0,
+        -1.0,  1.0,  1.0,
+        //后面
+        -1.0, -1.0, -1.0,
+        -1.0,  1.0, -1.0,
+        1.0,  1.0, -1.0,
+        1.0, -1.0, -1.0,
+        //顶面
+        -1.0,  1.0, -1.0,
+        -1.0,  1.0,  1.0,
+        1.0,  1.0,  1.0,
+        1.0,  1.0, -1.0,
+        //底面
+        -1.0, -1.0, -1.0,
+        1.0, -1.0, -1.0,
+        1.0, -1.0,  1.0,
+        -1.0, -1.0,  1.0,
+        //右面
+        1.0, -1.0, -1.0,
+        1.0,  1.0, -1.0,
+        1.0,  1.0,  1.0,
+        1.0, -1.0,  1.0,
+        //左面
+        -1.0, -1.0, -1.0,
+        -1.0, -1.0,  1.0,
+        -1.0,  1.0,  1.0,
+        -1.0,  1.0, -1.0,
+    ];
+    //使用顶点列表创建Float32Array对象填充缓存
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    //缓冲区中存放二十四个顶点信息，每个顶点由三个数据（三维）构成
+    cubeVertexPositionBuffer.itemSize = 3;
+    cubeVertexPositionBuffer.numItems = 24;
+    //创建立方体各顶点所用纹理缓冲区
+    cubeVertexTextureCoordBuffer = gl.createBuffer();
+    //将cubeVertexTextureCoordBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+    //使用JavaScript列表定义一个立方体的一组顶点所用纹理信息
+    var textureCoords = 
+    [
+      //前面
+      0.0, 0.0,
+      1.0, 0.0,
+      1.0, 1.0,
+      0.0, 1.0, 
+      //后面
+      1.0, 0.0,
+      1.0, 1.0,
+      0.0, 1.0,
+      0.0, 0.0,
+      //顶面
+      0.0, 1.0,
+      0.0, 0.0,
+      1.0, 0.0,
+      1.0, 1.0,
+      //底面
+      1.0, 1.0,
+      0.0, 1.0,
+      0.0, 0.0,
+      1.0, 0.0,
+      //右面
+      1.0, 0.0,
+      1.0, 1.0,
+      0.0, 1.0,
+      0.0, 0.0,
+      //左面
+      0.0, 0.0,
+      1.0, 0.0,
+      1.0, 1.0,
+      0.0, 1.0,
+    ];
+    //使用顶点纹理列表创建Float32Array对象填充缓存
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
+    //缓冲区中存放二十四个顶点信息，每个顶点由两个数据构成
+    cubeVertexTextureCoordBuffer.itemSize = 2;
+    cubeVertexTextureCoordBuffer.numItems = 24;
+    //创建立方体所用元素数组缓冲区
+    cubeVertexIndexBuffer = gl.createBuffer();
+    //将该缓冲区指定为当前操作所用缓冲区
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+    //指定每个面的两个三角形中应该使用顶点的序号
+    var cubeVertexIndices =
+    [
+        0, 1, 2,      0, 2, 3,    // 前面
+        4, 5, 6,      4, 6, 7,    // 后面
+        8, 9, 10,     8, 10, 11,  // 顶面
+        12, 13, 14,   12, 14, 15, // 底面
+        16, 17, 18,   16, 18, 19, // 右面
+        20, 21, 22,   20, 22, 23  // 左面
+    ];
+    //使用列表创建Uint16Array对象填充缓存
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeVertexIndices), gl.STATIC_DRAW);
+    //缓冲区中存放三十六个数据信息
+    cubeVertexIndexBuffer.itemSize = 1;
+    cubeVertexIndexBuffer.numItems = 36;
+}
+ 
+var xRot = 0;
+var yRot = 0;
+var zRot = 0;
+//绘制图形
+function drawScene() 
+{
+    //设置3D视图的视图大小
+    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+    //擦除canvas元素中内容
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //设置对视图的观察视角
+    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+    //使用恒等矩阵进行初始化，将绘制位置设置在视图中央
+    mat4.identity(mvMatrix);
+    //将绘制位置后移5个单位
+    mat4.translate(mvMatrix, [0.0, 0.0, -5.0]);
+    //旋转立方体
+    mat4.rotate(mvMatrix, degToRad(xRot), [1, 0, 0]);
+    mat4.rotate(mvMatrix, degToRad(yRot), [0, 1, 0]);
+    mat4.rotate(mvMatrix, degToRad(zRot), [0, 0, 1]);
+    //将cubeVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+    /*通知WebGL缓冲区中存放的顶点位置信息将被作为立方体各顶点位置信息来使用,
+    每个立方体使用三个数据(三维信息)*/
+    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    //将cubeVertexTextureCoordBuffer设定为接下来的操作所使用的缓冲区 
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+    //通知WebGL缓冲区中存放的顶点纹理信息将被作为立方体各顶点纹理信息来使用
+    gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    //通知WebGL最先处理的纹理为TEXTURE0
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, myTexture);
+    //设置程序对象中的一致变量的值为0
+    gl.uniform1i(shaderProgram.samplerUniform, 0);
+    //通知WebGL使用我们当前的模型-视图矩阵与投影矩阵
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+    //通知WebGL使用我们当前的模型-视图矩阵与投影矩阵
+    setMatrixUniforms();
+    //绘制立方体
+    gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+}
+var lastTime = 0;
+//设置动画参数
+function animate()
+{
+    //获取当前时间
+    var timeNow = new Date().getTime();
+    //如果动画绘制已经开始
+    if (lastTime != 0) 
+    {
+        //获取当前时间与上次动画绘制时间的间隔时间
+        var elapsed = timeNow - lastTime;
+        xRot += (90 * elapsed) / 1000.0;
+        yRot += (90 * elapsed) / 1000.0;
+        zRot += (90 * elapsed) / 1000.0;
+    }
+    lastTime = timeNow;
+}
+function tick() 
+{
+    requestAnimFrame(tick);
+    drawScene();
+    animate();
+}
+//绘制3D图形
+function webGLStart() 
+{
+    var canvas = document.getElementById("canvas1");//获取canvas元素
+    initGL(canvas);//初始化WebGL    
+    initShaders();//初始化渲染器
+    initBuffers();//初始化缓冲区
+    initTexture();//初始化纹理
+    //每次清除canvas元素中的内容时均将其填充为黑色
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.enable(gl.DEPTH_TEST);//使能深度测试
+    tick();//调用tick函数
+}
+</script> 
+</head>
+<body onload="webGLStart();">
+<canvas id="canvas1" style="border: none;" width="600" height="500"></canvas>
+</body>
+</html>
+

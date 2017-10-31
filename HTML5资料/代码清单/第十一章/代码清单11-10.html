@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作折线图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.line.js"></script>
+<script src="RGraph.common.tooltips.js"></script>
+
+<script>
+function window_onload()
+{
+    //绘制销售数量折线图，指定数据
+    line1= new RGraph.Line('myCanvas',[1200,1300,1400,1500,3000,1900,2000,2100,
+    2500,2700,1400,2600]);
+    //绘制统计图标题
+    line1.Set('chart.title', '2010年常州第一百货公司长虹彩电销售图');
+    //指定不绘制水平坐标轴
+    line1.Set('chart.noxaxis', true);
+    //指定左侧垂直坐标轴上标签文字的后缀单位
+    line1.Set('chart.units.post','台');
+    //指定折线图线宽
+    line1.Set('chart.linewidth', 3);
+    //指定左侧垂直坐标轴的顶部最大数字
+    line1.Set('chart.ymax', 3000);
+     //指定标签文字的绘制空间
+    line1.Set('chart.gutter',80);
+    //绘制销售数量折线图
+    line1.Draw();
+
+     //绘制销售成本折线图
+    line2 = new RGraph.Line('myCanvas',[16000,12000,12000,16000,18000,12000,12000,
+    16000,19000,11000,10000,16000]);
+    //指定X轴的坐标轴文字
+    line2.Set('chart.labels', ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定折线与图例中的颜色
+    line2.Set('chart.colors', ['blue', 'red']);  
+    //指定图例文字
+    line2.Set('chart.key', ['销售成本', '销售数量']);
+    //指定销售成本折线图的垂直坐标轴位于右侧
+    line2.Set('chart.yaxispos', 'right');
+    //指定右侧垂直坐标轴的顶部最大数字
+    line2.Set('chart.ymax', 20000); 
+    //指定右侧垂直坐标轴上标签文字的前缀单位
+    line2.Set('chart.units.pre','¥');
+    //指定标签文字的绘制空间
+    line2.Set('chart.gutter',80);
+    //指定线宽
+    line2.Set('chart.linewidth', 3);
+    //指定不绘制网格
+    line2.Set('chart.background.grid', false);
+    //绘制销售成本折线图
+    line2.Draw();
+}
+</script>
+
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作折线图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

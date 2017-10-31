@@ -1,0 +1,223 @@
+﻿<html>
+<head>
+<title>使用WebGL绘制三角形与矩形</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+<script id="shader-fs" type="x-shader/x-fragment">
+#ifdef GL_ES
+precision highp float;
+#endif
+
+void main(void) {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+}
+</script>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+attribute vec3 aVertexPosition;
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+void main(void){
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition,1.0);
+}
+</script>
+<script type="text/javascript">
+var gl;//WebGL上下文对象
+//初始化WebGL
+function initGL(canvas) 
+{
+    try
+    {
+        //获取canvas元素的WebGL上下文对象
+        gl = canvas.getContext("experimental-webgl");
+        //将3D视图的宽度设置为canvas元素的宽度
+        gl.viewportWidth = canvas.width;
+        //将3D视图的高度设置为canvas元素的高度
+        gl.viewportHeight = canvas.height;
+    } 
+    catch (e) 
+    {
+    }
+    if (!gl) //初始化失败
+        alert("对不起，您不能初始化WebGL。");
+}
+//创建渲染器
+function getShader(gl, id) 
+{
+    
+    //根据id查找页面上的元素
+    var shaderScript = document.getElementById(id);
+     //如果找不到元素则返回
+    if (!shaderScript) 
+        return null;
+    //取出元素中所有内容
+    var str ="";
+    var k = shaderScript.firstChild;
+    while (k) 
+    {
+        if (k.nodeType==3) 
+            str+= k.textContent;
+        k = k.nextSibling;
+    }
+   
+    var shader;
+    //如果元素类型为"x-shader/x-fragment"
+    if (shaderScript.type=="x-shader/x-fragment") 
+        //创建片元渲染器
+        shader = gl.createShader(gl.FRAGMENT_SHADER);
+    //如果元素类型为"x-shader/x-vertex"
+    else if (shaderScript.type=="x-shader/x-vertex") 
+        //创建顶点渲染器
+        shader = gl.createShader(gl.VERTEX_SHADER);
+    //如果元素类型为其他
+    else 
+        //返回null
+        return null;
+    //使用WebGL编译元素中内容
+    gl.shaderSource(shader,str);
+    gl.compileShader(shader);
+    //执行错误处理
+    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))
+    {
+        alert(gl.getShaderInfoLog(shader));
+        return null;
+    }
+    //返回渲染器
+    return shader;
+}
+
+var shaderProgram;//程序对象
+//初始化渲染器
+function initShaders() 
+{
+    //获取片元渲染器
+    var fragmentShader = getShader(gl, "shader-fs");
+    //获取顶点渲染器
+    var vertexShader = getShader(gl, "shader-vs");
+    //创建程序对象
+    shaderProgram = gl.createProgram();
+    //将渲染器绑定道程序对象上
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+    
+    //如果不能初始化渲染器
+    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) 
+        alert("不能初始化渲染器");
+
+    gl.useProgram(shaderProgram);
+    /*获取程序对象的avertexPosition属性的引用并将其保存在程序对象的
+    vertexPosition属性中*/
+    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+    //允许使用程序对象的vertexPosition属性值来绘制顶点
+    gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+    //从program对象中获取两个一致（uniform）变量uPMatrix与uMVMatrix的信息
+    shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+    shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+}
+
+var mvMatrix = mat4.create();
+var pMatrix = mat4.create();
+
+function setMatrixUniforms() 
+{
+    gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+    gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+}
+
+var triangleVertexPositionBuffer;//三角形顶点位置缓冲区
+var squareVertexPositionBuffer;//矩形顶点位置缓冲区
+//初始化缓冲区
+function initBuffers() 
+{
+    //创建三角形顶点位置缓冲区
+    triangleVertexPositionBuffer = gl.createBuffer();
+    //将triangleVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+    //使用JavaScript列表定义一个等腰三角形的一组顶点信息
+    var vertices = 
+    [
+        0.0,  1.0,  0.0,
+        -1.0, -1.0,  0.0,
+         1.0, -1.0,  0.0
+    ];
+    //使用顶点列表创建Float32Array对象填充缓存
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    //缓冲区中存放三个顶点信息，每个顶点由三个数据（三维）构成
+    triangleVertexPositionBuffer.itemSize = 3;
+    triangleVertexPositionBuffer.numItems = 3;
+    
+    //创建矩形顶点位置缓冲区
+    squareVertexPositionBuffer = gl.createBuffer();
+    //将squareVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
+    //使用JavaScript列表定义一个矩形的一组顶点信息
+    vertices = 
+    [
+        1.0,  1.0,  0.0,
+        -1.0,  1.0,  0.0,
+         1.0, -1.0,  0.0,
+        -1.0, -1.0,  0.0
+    ];
+    //使用顶点列表创建Float32Array对象填充缓存
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    //缓冲区中存放四个顶点信息，每个顶点由三个数据（三维）构成
+    squareVertexPositionBuffer.itemSize = 3;
+    squareVertexPositionBuffer.numItems = 4;
+}
+//绘制图形
+function drawScene() 
+{
+    //设置3D视图的视图大小
+    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+    //擦除canvas元素中内容
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //设置对视图的观察视角
+    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+    //使用恒等矩阵进行初始化，将绘制位置设置在视图中央
+    mat4.identity(mvMatrix);
+    //将绘制位置左移1.5个单位，内移7个单位（三角形第一个顶点位置处）
+    mat4.translate(mvMatrix, [-1.5, 0.0, -7.0]);
+    //将triangleVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
+    /*通知WebGL缓冲区中存放的顶点位置信息将被作为三角形各顶点位置信息来使用,
+    每个三角形使用三个数据(三维信息)*/
+    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, triangleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    //通知WebGL使用我们当前的模型-视图矩阵与投影矩阵
+    setMatrixUniforms();
+    //绘制三角形
+    gl.drawArrays(gl.TRIANGLES, 0, triangleVertexPositionBuffer.numItems);
+
+    //将绘制位置右移3个单位
+    mat4.translate(mvMatrix, [3.0, 0.0, 0.0]);
+    //将squareVertexPositionBuffer设定为接下来的操作所使用的缓冲区
+    gl.bindBuffer(gl.ARRAY_BUFFER, squareVertexPositionBuffer);
+    /*通知WebGL缓冲区中存放的顶点位置信息将被作为矩形各顶点位置信息来使用,
+    每个矩形使用三个数据(三维信息)*/
+    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, squareVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    //通知WebGL使用我们当前的模型-视图矩阵与投影矩阵
+    setMatrixUniforms();
+    //绘制矩形
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, squareVertexPositionBuffer.numItems);
+}
+//绘制3D图形
+function webGLStart() 
+{
+    var canvas = document.getElementById("canvas1");//获取canvas元素
+    initGL(canvas);//初始化WebGL
+    initShaders();//初始化渲染器
+    initBuffers();//初始化缓冲区
+    //每次清除canvas元素中的内容时均将其填充为黑色
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.enable(gl.DEPTH_TEST);//使能深度测试
+
+    drawScene();//进行绘制
+}
+</script>
+</head>
+<body onload="webGLStart();">
+<canvas id="canvas1" style="border: none;" width="500" height="500"></canvas>
+</body>
+
+</html>
+

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>小球弹跳游戏</title> 
+<script type="text/javascript">
+var BallX,BallY; //小球在canvas元素中的横坐标与纵坐标
+var AddX,AddY; //小球每次移动时的横向移动距离与纵向移动距离
+var width,height;//canvas元素的宽度与高度
+var canvas;//canvas元素
+var context;//canvas元素的图形上下文对象
+var functionId;//用来停止动画函数的整型变量
+
+//点击开始游戏按钮
+function btnBegin_onclick()
+{
+    canvas=document.getElementById("canvas");//获取canvas元素
+    width=canvas.width;//获取canvas元素的宽度
+    height=canvas.height;//获取canvas元素的高度
+    context=canvas.getContext('2d'); //获取canvas元素的图形上下文对象
+
+    BallX=parseInt(Math.random()*canvas.width);//随机设置小球的当前横坐标
+    BallY=parseInt(Math.random()*canvas.height);//随机设置小球的当前纵坐标
+    AddX=-5;//设置小球每次横向移动距离为5
+    AddY=-5;//设置小球每次纵向移动距离为5
+    draw();//绘制矩形桌面与小球
+
+　　//使开始游戏按钮变为无效
+    document.getElementById("btnBegin").disabled="disabled";
+    //每0.1秒重绘矩形桌面与小球，改变小球位置以产生动画效果 
+    functionId=setInterval("draw()",100);
+ }
+
+//重绘矩形桌面与小球
+function draw()
+{
+    context.clearRect(0,0,width,height);//清除canvas元素中的内容  
+    context.save();//保存当前绘制状态
+    context.fillStyle="lightgreen"; //设置桌面为淡绿色
+    context.strokeStyle="black";//设置桌面边框为黑色
+    context.linewidth=3; //设置桌面边框宽度
+    context.fillRect(3,3,width-5,height-5);//绘制淡绿色桌面
+    context.strokeRect(3,3,width-5,height-5);//绘制桌面黑色边框。
+    context.beginPath();//开始创建路径
+    context.fillStyle="blue";//设置小球为蓝色
+    context.arc(BallX,BallY,5,0,Math.PI * 2,false);//创建小球路径
+    BallX+=AddX;//计算小球移动后的下次绘制时的横坐标
+    BallY+=AddY;//计算小球移动后的下次绘制时的纵坐标
+    if(BallX<5)//小球向左移动时位置超过左边框
+    {
+	BallX=5;//将小球移到桌面内
+        AddX=-AddX;//改变小球移动方向，使其向右移动
+    }
+    else if(BallX>width-5)//小球向右移动时位置超过右边框
+    {
+        BallX=width-5;//将小球移到桌面内
+        AddX=-AddX;//改变小球移动方向，使其向左移动
+    }
+    if(BallY<5)//小球向上移动时位置超过上边框
+    {
+        BallY=5;//将小球移到桌面内
+        AddY=-AddY;//改变小球移动方向，使其向下移动
+    }
+    else if(BallY>height-5)//小球向下移动时位置超过下边框
+    {
+        BallY=height-5;//将小球移到桌面内
+        AddY=-AddY;//改变小球移动方向，使其向上移动
+    }
+    context.closePath();//关闭路径 
+    context.fill(); //绘制小球
+    context.restore();//恢复上次保存的绘制状态
+}
+function canvas_mouseup(ev)
+{
+    var differenceX;//鼠标击中点与小球中心点的横向偏差
+    var differenceY; //鼠标击中点与小球中心点的纵向偏差
+
+    //计算鼠标击中点与小球中心点的横向偏差
+    differenceX=ev.pageX-document.getElementById("canvas").offsetLeft-BallX;
+
+   //计算鼠标击中点与小球中心点的纵向偏差
+    differenceY=ev.pageY-document.getElementById("canvas").offsetTop-BallY;
+    //如果横向偏差与纵向偏差均在5个像素之内即为击中小球，因为小球的半径为5
+    if(-5<=differenceX&&differenceX<=5)
+        if(-5<=differenceY&&differenceY<=5)
+        {
+            alert("恭喜您获胜！游戏结束");
+            clearInterval(functionId);//停止动画
+
+            //恢复开始游戏按钮为有效状态
+            document.getElementById("btnBegin").disabled="";       
+         }
+}
+//画面打开时添加鼠标点击canvas元素时的事件处理
+function window_onload()
+{
+    document.getElementById("canvas").onmouseup=canvas_mouseup;
+}
+</script> 
+</head>  
+<body onload="window_onload()">  
+<h1>小球弹跳游戏</h1> 
+<input type="button" id="btnBegin" value="开始游戏" 
+onclick="btnBegin_onclick()"/><br/>
+<canvas id="canvas" width=400px height=200px></canvas>
+</body>  
+</html> 

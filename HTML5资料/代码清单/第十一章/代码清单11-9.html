@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作折线图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.line.js"></script>
+<script src="RGraph.common.tooltips.js"></script>
+
+<script>
+function window_onload()
+{
+    //绘制折线图，指定数据
+     myGraph = new RGraph.Line('myCanvas',
+      [160,130,140,160,300,190,200,210,250,270,140,260],
+      [120,120,120,150,180,120,120,160,190,110,100,160]);
+    //指定折线图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司长虹彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');      
+    //指定折线颜色
+    myGraph.Set('chart.colors', ['blue']);
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels', ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字  
+    myGraph.Set('chart.ylabels.specific',['300','250','200','150','100','50']);
+    //指定折线区域内的填充颜色
+    myGraph.Set('chart.fillstyle', 'lightgreen');
+    //用指定的填充颜色填充折线内部区域
+    myGraph.Set('chart.filled',true);
+    //指定只填充上下两根折线之间的区域
+    myGraph.Set('chart.filled.range',true);
+   //指定网格颜色
+    myGraph.Set('chart.background.grid.color', 'rgba(238,238,238,1)');
+    //指定标签文字的绘制空间
+    myGraph.Set('chart.gutter', 60); 
+    //绘制折线图   
+    myGraph.Draw();
+}    
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作折线图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

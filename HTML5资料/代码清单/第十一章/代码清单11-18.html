@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>在工具条提示信息中显示饼图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.common.tooltips.js" ></script>
+<script src="RGraph.bar.js"></script>
+<script src="RGraph.pie.js"></script>
+<script>
+
+function window_onload()
+{    
+   //绘制柱状图，指定数据
+    myGraph = new RGraph.Bar('myCanvas',[1200,1300,1400,1500,3000,1900,2000,2100,
+    2500,2700,1400,2600]);
+   //指定统计图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels',['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']);
+    //指定Y轴的坐标轴文字
+    myGraph.Set('chart.ylabels.specific',['3000','2500','2000','1500','1000','500']);
+    //指定在坐标轴顶部绘制说明销售数量的文字
+    myGraph.Set('chart.labels.above', true);
+     //指定网格自动与坐标轴单位对齐
+    myGraph.Set('chart.background.grid.autofit', true);   
+    myGraph.Set('chart.background.grid.autofit.align', true);
+    //指定标签文字所使用的空间尺寸
+    myGraph.Set('chart.gutter',65);
+    //指定工具条提示信息
+    myGraph.Set('chart.tooltips', function (idx) {return '<canvas id="__tooltip_canvas__" width="400" height="250">[您的浏览器不支持canvas元素]</canvas>';});
+    myGraph.Set('chart.tooltips.effect','snap');
+    //绘制柱状图
+    myGraph.Draw();  
+    //添加显示工具条提示信息时的事件处理
+    RGraph.AddCustomEventListener(myGraph, 'ontooltip', CreateTooltipGraph);   
+}
+//绘制饼图
+function CreateTooltipGraph(obj)
+{
+    //显示月份时使用的数组
+    var  months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    //各彩电12个月的销售数量，仅供示例用
+    var datas = [
+    [1200,1300,1400,1500,3000,1900],
+    [790,990,670,760,770,1100],
+    [1200,560,700,990,670,1100],
+    [780,1900,950,700,760,780],
+    [860,380,590,780,930,780],
+    [880,1100,780,680,960,1300],
+    [530,780,940,570,790,1200],
+    [1300,600,630,710,720,1100],
+    [920,850,750,820,480,1100],
+    [780,390,600,500,680,1200],
+    [760,1000,730,1000,630,880],
+    [480,1000,1200,1000,650,440]
+    ]; 
+    //各彩电占总销售数量的百分比
+    var labels=[
+    ['长虹（12%）', '康佳（13%）', '创维（14%）', '三星（15%）','夏普（29%）','索尼（17%）'],
+    ['长虹（16%）', '康佳（19%）', '创维（13%）', '三星（15%）','夏普（15%）','索尼（22%）'],
+    ['长虹（23%）', '康佳（11%）', '创维（13%）', '三星（19%）','夏普（13%）','索尼（22%）'],
+    ['长虹（13%）', '康佳（32%）', '创维（16%）', '三星（12%）','夏普（13%）','索尼（14%）'],
+    ['长虹（20%）', '康佳（9%）', '创维（14%）', '三星（18%）','夏普（21%）','索尼（17%）'],
+    ['长虹（15%）', '康佳（19%）', '创维（14%）', '三星（12%）','夏普（17%）','索尼（23%）'],
+    ['长虹（11%）', '康佳（16%）', '创维（20%）', '三星（12%）','夏普（16%）','索尼（25%）'],
+    ['长虹（26%）', '康佳（12%）', '创维（12%）', '三星（14%）','夏普（14%）','索尼（22%）'],
+    ['长虹（19%）', '康佳（17%）', '创维（15%）', '三星（17%）','夏普（10%）','索尼（22%）'],
+    ['长虹（19%）', '康佳（9%）', '创维（14%）', '三星（12%）','夏普（16%）','索尼（30%）'],
+    ['长虹（15%）', '康佳（20%）', '创维（15%）', '三星（20%）','夏普（13%）','索尼（17%）'],
+    ['长虹（10%）', '康佳（21%）', '创维（25%）', '三星（21%）','夏普（14%）','索尼（9%）']
+    ]
+    //获取触发事件的工具条提示信息项的编号
+    var idx = RGraph.Registry.Get('chart.tooltip').__index__; 
+    //绘制饼图，指定数据   
+    var pie=new RGraph.Pie('__tooltip_canvas__',datas[idx]);
+    //绘制饼图标题
+    pie.Set('chart.title', '2010年'+months[idx]+'常州第一百货公司彩电销售分布图');
+    //指定标签文字
+    pie.Set('chart.labels',labels[idx]);
+    //指定饼块分隔线宽
+    pie.Set('chart.linewidth', 5);
+    //指定饼块分隔线颜色
+    pie.Set('chart.strokestyle','white');
+    //指定标签文字所使用的空间尺寸
+    pie.Set('chart.gutter',65);
+    //绘制饼图
+    pie.Draw(); 
+}
+
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>在工具条提示信息中显示饼图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html>
+

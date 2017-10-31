@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jWebSocket示例</title>
+<script type="text/javascript" src="jWebSocket.js"></script>
+<script type="text/javascript" language="JavaScript">
+var jWebSocketClient;
+var userName;
+function window_onload()
+{
+    if( jws.browserSupportsWebSockets() ) {
+        jWebSocketClient = new jws.jWebSocketJSONClient();
+    } 
+    else {
+        var lMsg = jws.MSG_WS_NOT_SUPPORTED;
+        alert( lMsg );
+    }
+}
+function btnConnect_click()
+{
+    var lURL = jws.JWS_SERVER_URL;
+    userName = document.getElementById("userName").value;
+    var userPass = document.getElementById("userPass").value;
+    var msg=document.getElementById("msg");
+    msg.innerHTML="连接到地址： " + lURL + " 并且以\"" + userName + "\"用户名与服务器建立链接..." ;
+    var lRes = jWebSocketClient.logon(lURL,userName,userPass, {
+        OnOpen: function( aEvent ) {
+            msg.innerHTML+="<br/><font style='color:#888'>jWebSocket连接已建立</font>" ;
+        },
+        OnMessage: function( aEvent, aToken ) {
+            msg.innerHTML+="<br/><font style='color:#888'>jWebSocket \"" + aToken.type + "\" 令牌收到, 消息字符串为: \"" + aEvent.data + "\"</font>" ;
+        },
+        OnClose: function( aEvent ) {
+            msg.innerHTML+="<br/><font style='color:#888'>jWebSocket链接被关闭.</font>" ;
+        }
+    });
+    msg.innerHTML+="<br/>"+jWebSocketClient.resultToString(lRes);
+}
+function btnbroadcastText_click()
+{
+    var sendMsg=document.getElementById("sendMsg").value;
+    var msg=document.getElementById("msg");
+    msg.innerHTML+="<br/>广播消息：\""+sendMsg+"\"...";
+    var lRes = jWebSocketClient.broadcastText("",sendMsg);
+    if(lRes.code!=0)
+        msg.innerHTML=jWebSocketClient.resultToString( lRes );
+    document.getElementById("sendMsg").value="";
+}
+function btnDisConnect_click()
+{
+    if(jWebSocketClient)
+    {
+        var msg=document.getElementById("msg");
+        msg.innerHTML+="<br/>用户"+"\""+userName+"\"关闭连接";
+        var lRes=jWebSocketClient.close();
+        msg.innerHTML+="<br/>"+jWebSocketClient.resultToString( lRes );
+    }
+}
+</script>
+<body onload="window_onload()">
+用&nbsp;户&nbsp;&nbsp;名：<input type="text" id="userName"><br/>
+密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="text" id="userPass"><br/>
+发送消息：<input type="text" id="sendMsg"><br/>
+<input type="button" id="btnConnect" onclick="btnConnect_click()" value="建立连接">
+<input type="button" id="btnbroadcastText" onclick="btnbroadcastText_click()" value="广播消息">
+<input type="button" id="btnDisConnect" onclick="btnDisConnect_click()" value="关闭连接">
+<div id="msg">
+</body>

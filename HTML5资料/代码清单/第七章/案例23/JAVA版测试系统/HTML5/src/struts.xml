@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+<constant name="struts.devMode" value="true" />
+<constant name="struts.i18n.encoding" value="UTF-8" />
+<constant name="struts.custom.i18n.resources" value="messager" />
+<constant name="struts.ui.theme" value="simple"/>
+<package name="Actions" extends="struts-default">
+<action name="login" class="Actions.LoginAction">
+<result>/index.jsp</result>
+<result type="redirectAction" name="success1">
+<param name="actionName">/welcome</param>
+<param name="crossDomainFlag">${crossDomainFlag}</param>    
+</result>
+</action>
+<action name="welcome" class="Actions.welcomeAction">
+<result>/welcome.jsp</result>
+</action>
+<action name="logoff" class="Actions.LogoffAction">
+<result>/index.jsp</result>
+</action>
+<action name="indexAction" class="Actions.indexAction">
+<result>/index.jsp</result>
+<result name="success1">/welcome.jsp</result>
+</action>
+</package>
+</struts>

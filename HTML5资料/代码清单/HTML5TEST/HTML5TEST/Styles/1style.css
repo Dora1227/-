@@ -1,0 +1,111 @@
+HTML {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FIELDSET {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+LEGEND {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+UL,OL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+UL
+{
+    display:-webkit-box;
+    display: -moz-box;
+    -moz-box-orient: horizontal; 
+   -webkit-box-orient:horizontal;
+
+}
+LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;width:20%;
+}
+BODY {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; BACKGROUND: #ffffff; PADDING-BOTTOM: 20px; COLOR: #111111; PADDING-TOP: 20px; FONT-FAMILY: Helvetica, Arial, sans-serif
+}
+header#headertext {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; PADDING-BOTTOM: 10px; text-shadow: 0px 1px 1px #3d3d3d
+}
+FORM#userform {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; BACKGROUND: #87b6c9; PADDING-BOTTOM: 20px; WIDTH: 700px; PADDING-TOP: 20px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px
+}
+FORM#userform FIELDSET {
+	MARGIN-BOTTOM: 15px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+FORM#userform LEGEND {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; PADDING-BOTTOM: 10px; text-shadow: 0px 1px 1px #3d3d3d
+}
+FORM#userform FIELDSET FIELDSET LEGEND {
+	FONT-SIZE: 14px; PADDING-TOP: 10px
+}
+FORM#userform OL LI {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; BORDER-LEFT-COLOR: #a8a8a8; MARGIN-BOTTOM: 2px; BORDER-BOTTOM-COLOR: #a8a8a8; PADDING-BOTTOM: 5px; BORDER-TOP-STYLE: solid; BORDER-TOP-COLOR: #a8a8a8; LINE-HEIGHT: 30px; PADDING-TOP: 5px; BORDER-RIGHT-STYLE: solid; BORDER-LEFT-STYLE: solid; LIST-STYLE-TYPE: none; BORDER-RIGHT-COLOR: #a8a8a8; BORDER-BOTTOM-STYLE: solid; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;border-width:0px;
+}
+FORM#userform OL OL LI {
+	PADDING-RIGHT: 20px; BACKGROUND: none transparent scroll repeat 0% 0%;  BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+FORM#userform LABEL {
+	PADDING-RIGHT: 10px; FONT-SIZE: 15px; MARGIN-LEFT: 0px
+}
+FORM#userform LABEL[for=zipcode] {
+	PADDING-RIGHT: 27px
+}
+FORM#userform LABEL[for=country] {
+	PADDING-RIGHT: 27px
+}
+FORM#userform LABEL[for=address1] {
+	PADDING-RIGHT: 15px
+}
+FORM#userform LABEL[for=address2] {
+	PADDING-RIGHT: 15px
+}
+FORM#userform LABEL[for=cardnumber] {
+	PADDING-RIGHT: 15px
+}
+FORM#userform LABEL[for=email] {
+	PADDING-RIGHT: 40px
+}
+FORM#userform LABEL[for=cardname] {
+	PADDING-RIGHT: 60px
+}
+UNKNOWN {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; WIDTH: 200px; BORDER-TOP-STYLE: none; PADDING-TOP: 5px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; outline: none
+}
+FORM#userform input
+{
+    width:90%;
+}
+FORM#userform FIELDSET FIELDSET LABEL:hover {
+	CURSOR: pointer
+}
+UNKNOWN {
+	BACKGROUND: #efefef
+}
+FORM#userform BUTTON {
+	PADDING-RIGHT: 25px; DISPLAY: block; PADDING-LEFT: 25px; FONT-SIZE: 20px; BACKGROUND: #f9f9f9; PADDING-BOTTOM: 10px; MARGIN: auto; TEXT-TRANSFORM: uppercase; BORDER-TOP-STYLE: none; PADDING-TOP: 10px; FONT-FAMILY: Helvetica, Arial, sans-serif; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; text-shadow: 0px 1px 1px #3d3d3d; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px
+}
+FORM#userform BUTTON:hover {
+	BACKGROUND: #393939; CURSOR: pointer
+}
+#content {
+	FONT-SIZE: 18px; WIDTH: 750px; PADDING-TOP: 10px; text-shadow: 0px 1px 0.3px #2f2f2f
+}
+#content BUTTON {
+	PADDING-RIGHT: 25px; DISPLAY: block; PADDING-LEFT: 25px; FONT-SIZE: 20px; BACKGROUND: #8eb43b; PADDING-BOTTOM: 10px; MARGIN: auto; TEXT-TRANSFORM: uppercase; BORDER-TOP-STYLE: none; PADDING-TOP: 10px; FONT-FAMILY: Helvetica, Arial, sans-serif; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none; text-shadow: 0px 1px 1px #3d3d3d; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px
+}
+#content BUTTON A {
+	COLOR: #111; TEXT-DECORATION: none
+}
+#content BUTTON:hover {
+	BACKGROUND: #87b6c9; CURSOR: pointer
+}

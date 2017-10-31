@@ -1,0 +1,15 @@
+d:\我的文档\visual studio 2010\Projects\HTML5TEST\HTML5TEST\obj\Debug\ResolveAssemblyReference.cache
+d:\我的文档\visual studio 2010\Projects\HTML5TEST\HTML5TEST\bin\HTML5TEST.dll
+d:\我的文档\visual studio 2010\Projects\HTML5TEST\HTML5TEST\bin\HTML5TEST.pdb
+d:\我的文档\visual studio 2010\Projects\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.dll
+d:\我的文档\visual studio 2010\Projects\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.pdb
+J:\HTML5TEST\HTML5TEST\bin\HTML5TEST.dll
+J:\HTML5TEST\HTML5TEST\bin\HTML5TEST.pdb
+J:\HTML5TEST\HTML5TEST\obj\Debug\ResolveAssemblyReference.cache
+J:\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.dll
+J:\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.pdb
+G:\HTML5TEST\HTML5TEST\bin\HTML5TEST.dll
+G:\HTML5TEST\HTML5TEST\bin\HTML5TEST.pdb
+G:\HTML5TEST\HTML5TEST\obj\Debug\ResolveAssemblyReference.cache
+G:\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.dll
+G:\HTML5TEST\HTML5TEST\obj\Debug\HTML5TEST.pdb

@@ -1,0 +1,471 @@
+.movePop {
+	BORDER-BOTTOM: #c4c4c4 1px solid; POSITION: relative; BORDER-LEFT: #c4c4c4 1px solid; WIDTH: 648px; BACKGROUND: url(../../images/special/move/msnmove_bg.jpg) no-repeat; HEIGHT: 364px; BORDER-TOP: #c4c4c4 1px solid; BORDER-RIGHT: #c4c4c4 1px solid
+}
+.movePop .tbar {
+	POSITION: absolute; TOP: 7px; RIGHT: 8px
+}
+.movePop .tbar A {
+	BACKGROUND: url(../../images/special/move/move_ico.png) no-repeat; FLOAT: left; COLOR: #999; TEXT-DECORATION: none
+}
+.movePop .tbar A:link {
+	COLOR: #999; TEXT-DECORATION: none
+}
+.movePop .tbar A:visited {
+	COLOR: #999; TEXT-DECORATION: none
+}
+.movePop .tbar A:hover {
+	COLOR: #999; TEXT-DECORATION: none
+}
+.movePop .tbar A.fav {
+	LINE-HEIGHT: 22px; PADDING-LEFT: 24px; BACKGROUND-POSITION: 0px 0px; HEIGHT: 17px; MARGIN-RIGHT: 12px
+}
+.movePop .tbar A.shut {
+	MARGIN-TOP: 2px; WIDTH: 15px; BACKGROUND-POSITION: -84px -28px; HEIGHT: 15px
+}
+.xnav {
+	WIDTH: 256px; HEIGHT: 72px; MARGIN-LEFT: 245px
+}
+.xnav A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; BACKGROUND: url(../../images/special/move/move_btn5.jpg) no-repeat; FLOAT: left
+}
+.xnav A.lft {
+	WIDTH: 117px; BACKGROUND-POSITION: 0px 0px; HEIGHT: 72px
+}
+.xnav A.rgt {
+	WIDTH: 139px; BACKGROUND-POSITION: 0px -246px; HEIGHT: 72px
+}
+.xnav A.lft:hover {
+	BACKGROUND-POSITION: 0px -82px
+}
+.xnav A.lftact {
+	BACKGROUND-POSITION: 0px -164px
+}
+.xnav A.lftact:hover {
+	BACKGROUND-POSITION: 0px -164px
+}
+.xnav A.rgt:hover {
+	BACKGROUND-POSITION: 0px -328px
+}
+.xnav A.rgtact {
+	BACKGROUND-POSITION: 0px -410px
+}
+.xnav A.rgtact:hover {
+	BACKGROUND-POSITION: 0px -410px
+}
+.mnav {
+	WIDTH: 256px; HEIGHT: 72px; MARGIN-LEFT: 245px
+}
+.mnav A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; BACKGROUND: url(../../images/special/move/move_btn6.jpg) no-repeat; FLOAT: left
+}
+.mnav A.lft {
+	WIDTH: 139px; BACKGROUND-POSITION: 0px 0px; HEIGHT: 72px
+}
+.mnav A.rgt {
+	WIDTH: 117px; BACKGROUND-POSITION: 0px -246px; HEIGHT: 72px
+}
+.mnav A.lft:hover {
+	BACKGROUND-POSITION: 0px -82px
+}
+.mnav A.lftact {
+	BACKGROUND-POSITION: 0px -164px
+}
+.mnav A.lftact:hover {
+	BACKGROUND-POSITION: 0px -164px
+}
+.mnav A.rgt:hover {
+	BACKGROUND-POSITION: 0px -328px
+}
+.mnav A.rgtact {
+	BACKGROUND-POSITION: 0px -410px
+}
+.mnav A.rgtact:hover {
+	BACKGROUND-POSITION: 0px -410px
+}
+.movePop .con .letter .send A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .send A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .login UL LI.btn A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .login UL LI.btn A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .connect A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .connect A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .step A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .step A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .friendLs .btn A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .friendLs .btn A.b1 {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .friendLs .btn A.b1:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .friendLs .btn A.b2 {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .friendLs .btn A.b2:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .return A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .return A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .cancel A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .letter .cancel A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .sysbusy .btn A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .sysbusy .btn A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .sysok .btn A {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con .sysok .btn A:hover {
+	BACKGROUND: url(../../images/special/move/move_btn13.png) no-repeat
+}
+.movePop .con {
+	MARGIN-TOP: 29px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: hidden
+}
+.movePop .con .invite {
+	WIDTH: 176px; DISPLAY: inline; BACKGROUND: url(../../images/special/move/move_pic1.jpg) no-repeat; FLOAT: left; HEIGHT: 263px
+}
+.movePop .con .invite P {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 18px; PADDING-LEFT: 22px; PADDING-RIGHT: 0px; COLOR: #666; PADDING-TOP: 126px
+}
+.movePop .con .invite P EM {
+	DISPLAY: block; MARGIN-BOTTOM: 10px
+}
+.movePop .con .letter {
+	PADDING-BOTTOM: 20px; LINE-HEIGHT: 20px; PADDING-LEFT: 28px; WIDTH: 416px; PADDING-RIGHT: 28px; FLOAT: left; COLOR: #40403f; FONT-SIZE: 14px; PADDING-TOP: 20px
+}
+.movePop .con .letter P.psr {
+	POSITION: relative
+}
+.movePop .con .letter P.psr EM.hz {
+	POSITION: absolute; WIDTH: 30px; BACKGROUND: url(../../images/special/move/move_msnhz.gif) no-repeat; HEIGHT: 30px; TOP: 60px; LEFT: 42px
+}
+.movePop .con .letter P EM {
+	DISPLAY: block; MARGIN-BOTTOM: 5px
+}
+.movePop .con .letter P SPAN.txt {
+	TEXT-INDENT: -9999px; WIDTH: 410px; DISPLAY: block; BACKGROUND: url(../../images/special/move/msnmove_text.png) no-repeat; HEIGHT: 70px
+}
+.movePop .con .letter P.choice {
+	MARGIN-TOP: 10px; ZOOM: 1; OVERFLOW: auto
+}
+.movePop .con .letter P.choice INPUT {
+	FLOAT: left; COLOR: #666; FONT-SIZE: 12px
+}
+.movePop .con .letter P.choice LABEL {
+	FLOAT: left; COLOR: #666; FONT-SIZE: 12px
+}
+.movePop .con .letter P.choice INPUT {
+	MARGIN-TOP: 0px
+}
+.movePop .con .letter P.choice LABEL {
+	MARGIN-TOP: 1px; MARGIN-LEFT: 2px
+}
+.movePop .con .letter .send {
+	MARGIN-TOP: 22px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .letter .send A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 170px; BACKGROUND-POSITION: 0px 0px; FLOAT: right; HEIGHT: 35px; MARGIN-RIGHT: 50px
+}
+.movePop .con .letter .send A:hover {
+	BACKGROUND-POSITION: -180px 0px
+}
+.movePop .con .login {
+	COLOR: #64625b; FONT-SIZE: 12px
+}
+.movePop .con .login UL LI {
+	MARGIN-TOP: 18px; HEIGHT: 26px
+}
+.movePop .con .login UL LI.tip {
+	LINE-HEIGHT: 18px; MARGIN: 0px; PADDING-LEFT: 76px; COLOR: #8c8988
+}
+.movePop .con .login UL LI.btn {
+	LINE-HEIGHT: 18px; MARGIN-TOP: 24px; PADDING-LEFT: 110px; _margin-top: 12px
+}
+.movePop .con .login SPAN {
+	DISPLAY: block; VISIBILITY: visible; COLOR: #ff3f3e
+}
+.movePop .con .login LABEL {
+	TEXT-ALIGN: right; WIDTH: 98px; DISPLAY: inline-block; MARGIN-LEFT: -22px
+}
+.movePop .con .login INPUT.ipt {
+	BORDER-BOTTOM: #bebebe 1px solid; TEXT-ALIGN: left; BORDER-LEFT: #696969 1px solid; LINE-HEIGHT: 22px; TEXT-INDENT: 5px; WIDTH: 154px; HEIGHT: 22px; BORDER-TOP: #696969 1px solid; BORDER-RIGHT: #bebebe 1px solid
+}
+.movePop .con .login UL LI.btn A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -126px; FLOAT: left; HEIGHT: 26px
+}
+.movePop .con .login UL LI.btn A:hover {
+	BACKGROUND-POSITION: -180px -126px
+}
+.movePop .con .letter .connect {
+	MARGIN-TOP: 22px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .letter .connect A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 110px; BACKGROUND-POSITION: 0px -81px; FLOAT: right; HEIGHT: 35px; MARGIN-RIGHT: 50px
+}
+.movePop .con .letter .connect A:hover {
+	BACKGROUND-POSITION: -180px -81px
+}
+.movePop .con .letter .status {
+	LINE-HEIGHT: 20px; MIN-HEIGHT: 58px; PADDING-LEFT: 60px; BACKGROUND: url(../../images/special/move/move_btn9.png) no-repeat; PADDING-TOP: 20px; _height: 58px
+}
+.movePop .con .letter .step {
+	MARGIN-TOP: 70px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .letter .step A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 124px; BACKGROUND-POSITION: 0px -342px; FLOAT: right; HEIGHT: 26px; MARGIN-RIGHT: 50px
+}
+.movePop .con .letter .step A:hover {
+	BACKGROUND-POSITION: -180px -342px
+}
+.movePop .con .friendLs {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 60px; PADDING-RIGHT: 60px; PADDING-TOP: 0px
+}
+.movePop .con .friendLs .top {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 36px; PADDING-RIGHT: 4px; ZOOM: 1; COLOR: #999; OVERFLOW: auto; PADDING-TOP: 0px
+}
+.movePop .con .friendLs .top EM {
+	FLOAT: left
+}
+.movePop .con .friendLs .top SPAN {
+	FLOAT: right
+}
+.movePop .con .friendLs .top SPAN A {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs .top SPAN A:link {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs .top SPAN A:visited {
+	COLOR: #aa1b6f; TEXT-DECORATION: underline
+}
+.movePop .con .friendLs .top SPAN A:hover {
+	COLOR: #aa1b6f; TEXT-DECORATION: underline
+}
+.movePop .con .friendLs .top SPAN INPUT {
+	MARGIN-TOP: -3px; FLOAT: left; _margin-top: -4px
+}
+.movePop .con .friendLs .top SPAN LABEL {
+	MARGIN-LEFT: 2px; MARGIN-RIGHT: 16px
+}
+.movePop .con .friendLs UL.fls {
+	WIDTH: 518px; ZOOM: 1; HEIGHT: 190px; MARGIN-LEFT: 10px; OVERFLOW: auto; _width: 544px; _margin-left: -16px
+}
+.movePop .con .friendLs UL.fls LI {
+	POSITION: relative; TEXT-ALIGN: center; MARGIN-TOP: 5px; WIDTH: 60px; FLOAT: left; HEIGHT: 90px; MARGIN-LEFT: 26px; OVERFLOW: hidden
+}
+.movePop .con .friendLs UL.fls LI A.pic {
+	TEXT-ALIGN: center; MARGIN: 0px auto 3px; WIDTH: 54px; DISPLAY: block; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI A.pic:hover {
+	TEXT-ALIGN: center; MARGIN: 0px auto 3px; WIDTH: 54px; DISPLAY: block; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat 0px -63px; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI A.pic IMG {
+	MARGIN: 4px auto 0px; WIDTH: 46px; HEIGHT: 46px
+}
+.movePop .con .friendLs UL.fls LI EM.spic {
+	POSITION: absolute; WIDTH: 13px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat -1px -23px; HEIGHT: 13px; TOP: 37px; RIGHT: 7px
+}
+.movePop .con .friendLs UL.fls LI.xz EM.spic {
+	POSITION: absolute; WIDTH: 13px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat -1px 0px; HEIGHT: 13px; TOP: 37px; RIGHT: 7px
+}
+.movePop .con .friendLs UL.fls LI.xz EM.npic {
+	POSITION: absolute; WIDTH: 10px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat -3px -68px; HEIGHT: 10px; TOP: 40px; LEFT: 6px
+}
+.movePop .con .friendLs UL.fls LI.yx EM.npic {
+	POSITION: absolute; WIDTH: 10px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat -3px -68px; HEIGHT: 10px; TOP: 40px; LEFT: 6px
+}
+.movePop .con .friendLs UL.fls LI.xz A.pic {
+	TEXT-ALIGN: center; WIDTH: 54px; DISPLAY: block; MARGIN-BOTTOM: 3px; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat 0px -63px; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI.xz A.pic:hover {
+	TEXT-ALIGN: center; WIDTH: 54px; DISPLAY: block; MARGIN-BOTTOM: 3px; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat 0px -63px; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI.yx EM.spic {
+	POSITION: absolute; WIDTH: 15px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat 0px -46px; HEIGHT: 12px; TOP: 40px; RIGHT: 6px
+}
+.movePop .con .friendLs UL.fls LI EM.npic {
+	POSITION: absolute; WIDTH: 10px; BACKGROUND: url(../../images/special/move/move_btn12.png) no-repeat -3px -68px; HEIGHT: 10px; TOP: 40px; LEFT: 6px
+}
+.movePop .con .friendLs UL.fls LI.yx A.pic {
+	TEXT-ALIGN: center; WIDTH: 54px; DISPLAY: block; MARGIN-BOTTOM: 3px; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat 0px -128px; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI.yx A.pic:hover {
+	TEXT-ALIGN: center; WIDTH: 54px; DISPLAY: block; MARGIN-BOTTOM: 3px; BACKGROUND: url(../../images/special/move/move_btn11.png) no-repeat 0px -128px; HEIGHT: 54px
+}
+.movePop .con .friendLs UL.fls LI SPAN {
+	MARGIN-TOP: 1px; DISPLAY: block
+}
+.movePop .con .friendLs UL.fls LI SPAN A {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs UL.fls LI SPAN A:link {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs UL.fls LI SPAN A:visited {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs UL.fls LI SPAN A:hover {
+	COLOR: #aa1b6f; TEXT-DECORATION: none
+}
+.movePop .con .friendLs UL.fls LI.waiting {
+	WIDTH: 400px
+}
+.movePop .con .friendLs UL.fls LI.waiting P {
+	TEXT-ALIGN: center; LINE-HEIGHT: 20px; MARGIN-TOP: 20px; BACKGROUND: url(../../images/common/loading.gif) no-repeat center 50%; MARGIN-LEFT: 80px; PADDING-TOP: 50px
+}
+.movePop .con .friendLs .btn {
+	MARGIN-TOP: 16px; ZOOM: 1; MARGIN-LEFT: 145px; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .friendLs .btn A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -198px; FLOAT: left; HEIGHT: 26px; MARGIN-RIGHT: 19px
+}
+.movePop .con .friendLs .btn A.b1 {
+	BACKGROUND-POSITION: 0px -198px
+}
+.movePop .con .friendLs .btn A.b1:hover {
+	BACKGROUND-POSITION: -180px -198px
+}
+.movePop .con .friendLs .btn A.b2 {
+	WIDTH: 139px; BACKGROUND-POSITION: 0px -45px; HEIGHT: 26px
+}
+.movePop .con .friendLs .btn A.b2:hover {
+	BACKGROUND-POSITION: -180px -45px
+}
+.movePop .con .friendLs .btn A.b3 {
+	WIDTH: 84px; BACKGROUND-POSITION: 0px -378px; HEIGHT: 26px; MARGIN-LEFT: 88px
+}
+.movePop .con .friendLs .btn A.b3:hover {
+	BACKGROUND-POSITION: -180px -378px
+}
+.movePop .con .letter .false {
+	LINE-HEIGHT: 20px; MARGIN-TOP: 20px; PADDING-LEFT: 24px; BACKGROUND: url(../../images/special/move/move_ico.png) no-repeat 0px -60px; MARGIN-LEFT: 40px
+}
+.movePop .con .letter .return {
+	MARGIN-TOP: 110px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .letter .return A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -270px; FLOAT: right; HEIGHT: 26px; MARGIN-RIGHT: 50px
+}
+.movePop .con .letter .return A:hover {
+	BACKGROUND-POSITION: -180px -270px
+}
+.movePop .con .letter .waiting {
+	LINE-HEIGHT: 20px; MARGIN-TOP: 20px; PADDING-LEFT: 24px; BACKGROUND: url(../../images/common/loading.gif) no-repeat 0px 3px; MARGIN-LEFT: 40px
+}
+.movePop .con .letter .cancel {
+	MARGIN-TOP: 110px; WIDTH: 100%; ZOOM: 1; CLEAR: both; OVERFLOW: auto
+}
+.movePop .con .letter .cancel A {
+	TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -234px; FLOAT: right; HEIGHT: 26px; MARGIN-RIGHT: 50px
+}
+.movePop .con .letter .cancel A:hover {
+	BACKGROUND-POSITION: -180px -234px
+}
+.movePop .con .sysbusy {
+	TEXT-ALIGN: center; MARGIN: 60px auto 0px; WIDTH: 260px; FONT-SIZE: 14px
+}
+.movePop .con .sysbusy P {
+	LINE-HEIGHT: 45px; BACKGROUND: url(../../images/special/move/move_ico.png) no-repeat -53px -162px; HEIGHT: 54px
+}
+.movePop .con .sysbusy .btn A {
+	MARGIN-TOP: 35px; TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -270px; FLOAT: left; HEIGHT: 26px; MARGIN-LEFT: 80px
+}
+.movePop .con .sysok .btn A {
+	MARGIN-TOP: 35px; TEXT-INDENT: -9999px; OUTLINE-STYLE: none; WIDTH: 84px; BACKGROUND-POSITION: 0px -270px; FLOAT: left; HEIGHT: 26px; MARGIN-LEFT: 80px
+}
+.movePop .con .sysok .btn A {
+	MARGIN: 35px 10px 0px
+}
+.movePop .con .sysok .btn A.b2 {
+	WIDTH: 114px; BACKGROUND-POSITION: 0px -306px; HEIGHT: 26px
+}
+.movePop .con .sysok .btn A.b2:hover {
+	BACKGROUND-POSITION: -180px -306px
+}
+.movePop .con .sysbusy .btn A:hover {
+	BACKGROUND-POSITION: -180px -270px
+}
+.movePop .con .sysok .btn A:hover {
+	BACKGROUND-POSITION: -180px -270px
+}
+.movePop .con .sysok {
+	TEXT-ALIGN: center; MARGIN: 60px auto 0px; WIDTH: 260px; FONT-SIZE: 14px
+}
+.movePop .con .sysok P {
+	LINE-HEIGHT: 45px; PADDING-LEFT: 35px; BACKGROUND: url(../../images/special/move/move_ico.png) no-repeat -53px -97px; HEIGHT: 54px
+}
+.moveTip {
+	WIDTH: 100%; HEIGHT: 38px
+}
+.moveTip .con {
+	Z-INDEX: 9; BORDER-BOTTOM: #dcdcdc 1px solid; POSITION: relative; BORDER-LEFT: #dcdcdc 1px solid; BACKGROUND: url(../../images/special/move/msnmove_bar.png) repeat-x -335px -138px; HEIGHT: 36px; BORDER-TOP: #dcdcdc 1px solid; BORDER-RIGHT: #dcdcdc 1px solid
+}
+.moveTip .con A.shut {
+	Z-INDEX: 999; POSITION: absolute; WIDTH: 15px; BACKGROUND: url(../../images/special/move/move_btn8.png) no-repeat 0px -92px; HEIGHT: 15px; TOP: 3px; RIGHT: 3px
+}
+.moveTip .con .mid {
+	Z-INDEX: 10; POSITION: relative; MIN-WIDTH: 430px; WIDTH: 100%; HEIGHT: 36px
+}
+.moveTip .con .mid .midWrap {
+	WIDTH: 100%; DISPLAY: inline; BACKGROUND: url(../../images/special/move/msnmove_bar.png) no-repeat 0px 0px; FLOAT: left; HEIGHT: 36px
+}
+.moveTip .con .rgt {
+	Z-INDEX: 20; POSITION: relative; LINE-HEIGHT: 20px; WIDTH: 200px; BACKGROUND: url(../../images/special/move/msnmove_bar.png) no-repeat 0px -46px; FLOAT: right; HEIGHT: 36px; MARGIN-LEFT: -200px
+}
+.moveTip .con .rgt A {
+	MARGIN-TOP: 8px; PADDING-LEFT: 22px; BACKGROUND: url(../../images/special/move/move_ico.png) no-repeat 0px 1px; FLOAT: right; MARGIN-RIGHT: 30px
+}
+.moveTip .con .mid .midWrap .links {
+	LINE-HEIGHT: 36px; MARGIN: 0px auto; WIDTH: 430px; BACKGROUND: url(../../images/special/move/msnmove_bar.png) no-repeat 0px -92px; HEIGHT: 36px
+}
+.moveTip .con .mid .midWrap .links SPAN {
+	PADDING-LEFT: 40px; BACKGROUND: url(../../images/special/move/move_btn8.png) no-repeat; FLOAT: left; COLOR: #999
+}
+.moveTip .con .mid .midWrap .links A {
+	FONT-FAMILY: "arial"; COLOR: #074387; TEXT-DECORATION: underline
+}
+.moveTip .con .mid .midWrap .links A:link {
+	FONT-FAMILY: "arial"; COLOR: #074387; TEXT-DECORATION: underline
+}
+.moveTip .con .mid .midWrap .links A:visited {
+	COLOR: #074387; TEXT-DECORATION: underline
+}
+.moveTip .con .mid .midWrap .links A:hover {
+	COLOR: #074387; TEXT-DECORATION: underline
+}
+.moveTip .con .mid .midWrap .links SPAN.b1 {
+	BACKGROUND-POSITION: 0px 0px
+}
+.moveTip .con .mid .midWrap .links SPAN.b2 {
+	BACKGROUND-POSITION: 0px -46px
+}
+.moveTip .con .mid .midWrap .links SPAN.sx {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 10px; PADDING-LEFT: 0px; WIDTH: 2px; PADDING-RIGHT: 0px; BACKGROUND: url(../../images/special/move/move_btn8.png) -28px -112px; FLOAT: left; HEIGHT: 36px; PADDING-TOP: 0px
+}

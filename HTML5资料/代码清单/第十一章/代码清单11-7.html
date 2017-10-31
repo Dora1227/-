@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作折线图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.line.js"></script>
+<script src="RGraph.common.tooltips.js"></script>
+
+<script>
+function window_onload()
+{
+    //绘制折线图，指定数据
+    var myGraph = new RGraph.Line('myCanvas',[1200,1300,1400,1500,3000,1900,2000,
+    2100,2500,2700,1400,2600]);
+    //指定折线图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司长虹彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels', ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字  
+    myGraph.Set('chart.ylabels.specific',['3000','2500','2000','1500','1000','500']);
+    //指定在折线连接点处绘制说明销售数量的文字
+    myGraph.Set('chart.labels.above', true); 
+   //指定网格颜色
+    myGraph.Set('chart.background.grid.color', 'rgba(238,238,238,1)');
+    //指定标签文字的绘制空间
+    myGraph.Set('chart.gutter', 60); 
+    //绘制折线图   
+    myGraph.Draw();
+    //注册控件
+    RGraph.Register(myGraph);
+    //书写鼠标在折线图上移动时的函数
+    myGraph.canvas.onmousemove = function (e)
+    {
+        //注册事件
+        RGraph.FixEventObject(e);
+       
+        var canvas  = e.target;//获得绘制折线图的canvas元素
+        var context = canvas.getContext('2d');//获得绘制折线图的canvas元素的图形上下文对象
+        var obj     = e.target.__object__;//获得事件对象
+      
+        // 使用getPoint方法来得到取得光标焦点的连接点
+        var point = obj.getPoint(e);
+      
+        if (point) //如果存在取得光标焦点的连接点
+        {            
+            canvas.style.cursor = 'pointer';//改变鼠标指针为手指形状
+            
+            //如果工具条提示已经被显示
+            if (RGraph.Registry.Get('chart.tooltip')
+            && RGraph.Registry.Get('chart.tooltip').__index__ == point[3]) {
+                return;
+            }
+
+            //重绘折线图
+            RGraph.Redraw();
+
+            //显示工具条提示
+            RGraph.Tooltip(canvas, obj.Get('chart.labels')[point[3]], e.pageX, e.pageY, 
+            point[3]);
+
+            //突出显示连接点
+            context.fillStyle = 'blue';//使用蓝色填充
+            context.beginPath();//开始创建路径
+            context.moveTo(point[1], point[2]);//绘制起点移动到连接点上
+            context.arc(point[1], point[2], 4, 0, 6.26, 0);//创建圆形路径
+            context.fill();//填充圆圈
+            
+            return;
+        }        
+        canvas.style.cursor = 'default';//恢复默认鼠标指针
+    }
+} 
+//在其他位置处点击鼠标时取消当前显示的工具条提示信息及蓝色放大折线点
+window.onclick = function ()
+{
+    RGraph.Redraw();
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作折线图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

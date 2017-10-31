@@ -1,0 +1,2 @@
+﻿案例四的详细解决方案为HTML5TEST文件夹中的HTML5TEST.sln，开发工具为Microsoft Visual Studio 2010或更高版本，开发语言为ASP.NET(C#)，本文件夹中的文件为第二章案例4中的源代码文件，供没有Microsoft Visual Studio 2010开发工具的读者学习之用。
+createTable.txt中为用来创建本章所需使用表的sql语句。

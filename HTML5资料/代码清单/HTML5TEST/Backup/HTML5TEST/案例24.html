@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script language="javascript">
+    window.addEventListener("message", function (ev) {
+        if (ev.origin != "http://localhost:1618") {
+            return;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "案例24BackCode.aspx");
+        xhr.onreadystatechange =
+        function () {
+            var result = xhr.responseText;
+            if (xhr.readyState == 4) {
+                ev.source.postMessage(result, ev.origin);
+            }
+        }
+        xhr.send(null);
+    }, false);
+</SCRIPT>
+</head>
+<body>
+</body>
+</html>

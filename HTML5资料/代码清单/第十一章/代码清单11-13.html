@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作饼图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.pie.js"></script>
+<script src="RGraph.common.tooltips.js"></script>
+<script>
+function window_onload()
+{
+    //绘制饼图，获取饼图数据
+    var pie=new RGraph.Pie('myCanvas',[12000,13000,14000,15000,30000,19000]);
+    //绘制饼图标题
+    pie.Set('chart.title', '2010年常州第一百货公司彩电销售分布图');
+    //绘制饼图标签文字
+    pie.Set('chart.labels', ['长虹（12%）', '康佳（13%）', '创维（14%）', '三星（15%）',
+    '夏普（29%）','索尼（17%）']);
+    //指定饼图分隔线宽
+    pie.Set('chart.linewidth', 5);
+    //指定饼图分隔线颜色
+    pie.Set('chart.strokestyle','white');
+    //指定工具条提示信息的出现效果为淡入效果
+    pie.Set('chart.tooltips.effect', 'fade');
+    //指定当鼠标指针在饼块上移动时出现工具条提示信息
+    pie.Set('chart.tooltips.event', 'onmousemove');
+    //指定工具条提示信息的文字
+    pie.Set('chart.tooltips', ['长虹（12%）','康佳（13%）','创维（14%）','三星（15%）',
+    '夏普（29%)','索尼（17%）']);
+    //指定工具条提示信息具有3d效果
+    pie.Set('chart.highlight.style', '3d');  
+    //绘制饼图
+    pie.Draw();
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作饼图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html>

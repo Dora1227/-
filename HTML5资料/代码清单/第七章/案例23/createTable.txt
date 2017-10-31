@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[users](
+	[userName] [varchar](50) NOT NULL,
+	[userPass] [varchar](50) NOT NULL
+) ON [PRIMARY]

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=620" />
+<title>Geolocation API示例</title>
+<script type="text/javascript">
+var streetNumber,street,city,province,country;
+var watchId;
+function window_onload() {
+    if(navigator.geolocation==null)
+        alert("您的浏览器不支持Geolocation API");
+    else
+        navigator.geolocation.getCurrentPosition(showMap,onError,{timeout:60000,enableHighAccuracy:true});
+}
+function watchPosition() {
+    watchId=navigator.geolocation.watchPosition(showMap);
+}
+function clearWatch()
+{
+    navigator.geolocation.clearWatch(watchId);
+}
+function showMap(position)
+{    
+    var coords = position.coords;
+    var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+    var myOptions = {
+        zoom: 18,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }; 
+    var map1= new google.maps.Map(document.getElementById("map"), myOptions);
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map1
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content: "当前位置!"
+    });
+    infowindow.open(map1, marker);
+}
+function onError(error)
+{
+    var message = "";  
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+          message = "位置服务被拒绝";
+          break;
+       case error.POSITION_UNAVAILABLE:
+          message = "未能获取到位置信息";
+          break;
+       case error.PERMISSION_DENIED_TIMEOUT:
+          message = "在规定时间内未能获取到位置信息";            
+          break;
+    }
+    if (message == "")
+    {
+        var strErrorCode = error.code.toString();
+        message = "由于不明原因，未能获取到位置信息（错误号："+strErrorCode+").";
+    }
+    alert(message);
+    document.getElementById("watchPosition").disabled="disabled";
+    document.getElementById("clearWatch").disabled="disabled";
+}
+</script>
+<script type="text/javascript" src=http://maps.google.com/maps/api/js?sensor=false></script>
+</head>
+<body onload="window_onload()">
+    <input type="button" id="watchPosition" value="监视位置更改" onclick="watchPosition()"/><input type="button" id="clearWatch" value="停止监视" onclick="clearWatch"/>
+    <div id="map" style="width:500px; height:460px"></div>
+</body>
+

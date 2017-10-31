@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="autodetect">
+<bean id ="dataSource" class ="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
+    <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> 
+    <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=ttt" /> 
+    <property name="username" value="aaa" /> 
+    <property name="password" value="aaaaaaa"/> 
+</bean> 
+<!-- SessionFactory -->
+<bean id="sessionFactory"
+      class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+      <property name="dataSource">
+          <ref bean="dataSource"/>
+      </property>
+      <property name="configLocation">
+          <value>classpath:hibernate.cfg.xml</value>
+      </property>    
+      <property name="hibernateProperties">
+          <value>
+              hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+          </value>
+      </property>
+</bean>
+<!-- DAO -->
+<bean id="userDao" class="data.impl.userImpl">
+      <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+      </property>
+      <property name="messages"><ref bean="messageSource"/></property>
+</bean>
+<!-- Services -->
+<bean id="userService" class="Spring.impl.UserService">
+      <property name="userDao">
+            <ref bean="userDao"/>
+      </property>
+</bean>  
+</beans>

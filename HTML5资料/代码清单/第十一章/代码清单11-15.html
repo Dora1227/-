@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作横向柱状图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.hbar.js"></script>
+<script>
+function window_onload()
+{
+    //绘制横向柱状图，指定数据
+    myGraph = new RGraph.HBar('myCanvas',[1200,1300,1400,1500,3000,1900,2000,2100,2500,2700,1400,2600]);
+    //指定统计图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司长虹彩电销售图');
+     //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售台数');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售月份');   
+    //指定Y轴的坐标轴文字 
+    myGraph.Set('chart.labels',['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定在坐标轴右端绘制说明销售数量的文字
+    myGraph.Set('chart.labels.above', true);    
+    //指定网格自动与坐标轴单位对齐
+    myGraph.Set('chart.background.grid.autofit', true);
+    myGraph.Set('chart.background.grid.autofit.align', true);
+    //指定标签文字所使用的空间尺寸
+    myGraph.Set('chart.gutter',45);
+     //绘制横向柱状图
+    myGraph.Draw(); 
+    
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作横向柱状图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

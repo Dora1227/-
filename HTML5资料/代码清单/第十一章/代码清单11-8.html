@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作折线图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.line.js"></script>
+<script src="RGraph.common.tooltips.js"></script>
+<script>
+function window_onload()
+{
+    //绘制折线图，指定数据
+     myGraph = new RGraph.Line('myCanvas',[1200,1300,1400,1500,3000,1900,2000,2100,2500,2700,1400,2600],[1600,1200,1200,1600,1800,1200,1200,1600,1900,
+     1100,1000,1600]);
+    //指定折线图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定折线图例被绘制在图例区域中
+    myGraph.Set('chart.key.position', 'graph');
+   //指定图例文字    
+    myGraph.Set('chart.key', ['长虹', '康佳']);    
+    //指定折线颜色
+    myGraph.Set('chart.colors', ['blue', 'green']);
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels', ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字  
+    myGraph.Set('chart.ylabels.specific',['3000','2500','2000','1500','1000','500']);
+    //指定线宽
+    myGraph.Set('chart.linewidth', 5);
+   //指定网格颜色
+    myGraph.Set('chart.background.grid.color', 'rgba(238,238,238,1)');
+    //指定标签文字的绘制空间
+    myGraph.Set('chart.gutter', 60); 
+    //绘制折线图   
+    myGraph.Draw();
+}    
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作折线图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 

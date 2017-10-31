@@ -1,0 +1,2 @@
+﻿本文件夹中所有文件为本书中ASP.NET测试系统中完整的解决方案及源代码。
+createTable-orders.txt与createTable-users.txt中为用来创建本书中所需使用表的sql语句。

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<meta charset=utf-8 />
+<title>HTML 5版菜单</title>
+<style type="text/css">
+body {
+	margin:0px;
+}
+
+nav ul li{
+    list-style:none;
+	width:195px;
+	line-height:10px;
+}
+nav ul li img{
+	width:195px;
+	height:28px;
+	cursor:pointer;
+}
+nav ul li#first{
+	height:6px;
+	background:url(images/left_title_bg.gif);
+}
+
+nav ul li ul {
+	display:inline;
+	padding:0px;
+}
+nav ul li ul li{
+	height:20px;
+	background-color:#AEE4EE;
+	font-size: 12px;
+	color: #333333;
+	text-align: center;	
+	width:195px;
+}
+
+nav ul li ul li a{
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+}
+</style>
+<script>
+function init()
+{
+	document.getElementById("submenu1").hidden=true;
+	document.getElementById("submenu2").hidden=true;
+}
+function nav_fill1()
+{
+	if(document.getElementById("submenu1").hidden===true)
+		document.getElementById("submenu1").hidden=false;
+	else
+		document.getElementById("submenu1").hidden=true;
+}
+function nav_fill2()
+{
+	if(document.getElementById("submenu2").hidden===true)
+		document.getElementById("submenu2").hidden=false;
+	else
+		document.getElementById("submenu2").hidden=true;
+}
+</script>
+</head>
+
+<body onload="init()">
+<nav id="nav">
+	<ul>
+	    <li id="first"></li>
+		<li><img src="images/xtgl.gif" onclick="nav_fill1()"/></li>
+		<li>
+		    <nav id="submenu1">
+		        <ul>
+			        <li><a href="add_user.html"  target="mainFrame">用户权限管理</a></li>
+			        <li><a href="data_security.html"  target="mainFrame">数据安全管理</a></li>		
+			        <li><a href="soft_update.html"  target="mainFrame">软件升级管理</a></li>								
+			    </ul>
+			</nav>
+		</li>
+		<li><img src="images/jcxx.gif" onclick="nav_fill2()"/></li>
+		<li>		
+		    <nav id="submenu2">
+		        <ul>
+			        <li><a href="add_city.html"  target="mainFrame">城市管理</a></li>
+			    <li><a href="add_store"  target="mainFrame">仓库管理</a></li>		
+			    <li><a href="add_material.html"  target="mainFrame">材料管理</a></li>								
+			</ul>
+			</nav>
+		</li>		
+		<li><a href="qpxx.html"><img src="images/qpxx.gif"/></a></li>	
+		<li><a href="ccgl.html"><img src="images/ccgl.gif"/></a></li>	
+		<li><a href="qpcz.html"><img src="images/qpcz.gif"/></a></li>			
+		<li><a href="cccz.html"><img src="images/cccz.gif"/></a></li>
+		<li><a href="qpjy.html"><img src="images/qpjy.gif"/></a></li>
+	</ul>
+</nav>
+</body>
+</html>

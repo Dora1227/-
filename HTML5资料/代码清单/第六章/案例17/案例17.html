@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>HTML 5版本的日程提醒簿</title>
+<style>
+div{        
+    -webkit-border-image: url(日历背景.png) 10;
+    -moz-border-image: url(日历背景.png) 10;
+    width:300px;
+    height:300px;
+    padding:35px;
+    background:#eee;
+    font-weight:bold;
+}
+li{
+    list-style:none;
+}
+</style>
+<script type="text/javascript">
+var dateElement;
+var today;
+function window_onload()
+{
+    dateElement=document.getElementById("date1");
+    today=document.getElementById("today");
+    setToday();
+}
+function date_onchange()
+{   
+    var obj;
+    if(isNaN(Date.parse(dateElement.value)))
+    {
+        setToday();
+        return;
+    }
+    today.innerHTML=dateElement.value;
+    obj=JSON.parse(localStorage.getItem(dateElement.value));
+    setInnerHTML(obj);
+}
+function save()
+{
+    var obj=new Object();
+    obj.record=new Array();
+    if(document.getElementById("li1").innerHTML!="(尚未记录）")
+        obj.record.push(document.getElementById("li1").innerHTML);
+    if(document.getElementById("li2").innerHTML!="(尚未记录）")
+        obj.record.push(document.getElementById("li2").innerHTML);
+    if(document.getElementById("li3").innerHTML!="(尚未记录）")
+        obj.record.push(document.getElementById("li3").innerHTML);
+    if(document.getElementById("li4").innerHTML!="(尚未记录）")
+        obj.record.push(document.getElementById("li4").innerHTML);
+    if(document.getElementById("li5").innerHTML!="(尚未记录）")
+        obj.record.push(document.getElementById("li5").innerHTML);
+    localStorage.setItem(dateElement.value,JSON.stringify(obj));  
+}
+function setInnerHTML(obj)
+{
+    if(obj==null||obj.record==null)
+    {
+        document.getElementById("li1").innerHTML="(尚未记录）";
+        document.getElementById("li2").innerHTML="(尚未记录）";
+        document.getElementById("li3").innerHTML="(尚未记录）";
+        document.getElementById("li4").innerHTML="(尚未记录）";
+        document.getElementById("li5").innerHTML="(尚未记录）";
+    }
+    else
+    {
+        if(obj.record[0]!=null)
+            document.getElementById("li1").innerHTML=obj.record[0];
+        else
+            document.getElementById("li1").innerHTML="(尚未记录）";
+        if(obj.record[1]!=null)
+            document.getElementById("li2").innerHTML=obj.record[1];
+        else
+            document.getElementById("li2").innerHTML="(尚未记录）";
+        if(obj.record[2]!=null)
+            document.getElementById("li3").innerHTML=obj.record[2];
+        else
+            document.getElementById("li3").innerHTML="(尚未记录）";
+        if(obj.record[3]!=null)
+            document.getElementById("li4").innerHTML=obj.record[3];
+        else
+            document.getElementById("li4").innerHTML="(尚未记录）";
+        if(obj.record[4]!=null)
+            document.getElementById("li5").innerHTML=obj.record[5];
+        else
+            document.getElementById("li5").innerHTML="(尚未记录）";
+    }
+}
+function setToday()
+{
+    var date=new Date();
+    var yearStr=String(date.getFullYear());
+    var monthStr=String(date.getMonth()+1);
+    var dateStr=String(date.getDate());
+    if (monthStr.length == 1)   monthStr = '0' + monthStr;
+    if (dateStr.length == 1) dateStr = '0' + dateStr;
+    var str=yearStr+"-"+monthStr+"-"+dateStr;
+    dateElement.value=str;
+    today.innerHTML=dateElement.value;
+    var obj=JSON.parse(localStorage.getItem(dateElement.value));
+    setInnerHTML(obj);
+}
+</script> 
+</head>  
+<body onload="window_onload()">  
+<h1>HTML 5版本的日程提醒簿</h1>  
+选择日期：<input id="date1" type="date" onchange="date_onchange()"><input type="button" value="保存" onclick="save()"/><br/>
+<div>
+本日日期：<span id="today"></span><br/>
+本日要事：<br/>
+<ul  contentEditable="true">
+<li id="li1">(尚未记录）</li>
+<li id="li2">(尚未记录）</li>
+<li id="li3">(尚未记录）</li>
+<li id="li4">(尚未记录）</li>
+<li id="li5">(尚未记录）</li>
+</ul>
+</div> 
+</body> 
+</html>

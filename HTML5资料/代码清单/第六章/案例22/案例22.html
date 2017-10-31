@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>   
+<html manifest="book.manifest">
+<head>   
+<meta charset="UTF-8">  
+<title>HTML 5版本的日程提醒簿</title>
+<style>
+div{        
+    -webkit-border-image: url(日历背景.png) 10;
+    -moz-border-image: url(日历背景.png) 10;
+    width:300px;
+    height:300px;
+    padding:35px;
+    background:#eee;
+    font-weight:bold;
+}
+li{
+    list-style:none;
+}
+</style>
+<script type="text/javascript" src="script.js"></script>
+</head>  
+<body onload="window_onload()">  
+<h1>HTML 5版本的日程提醒簿</h1>  
+选择日期：<input id="date1" type="date" onchange="date_onchange()"><input type="button" value="保存" onclick="save()"/><br/>
+<div>
+本日日期：<span id="today"></span><br/>
+本日要事：<br/>
+<ul  contentEditable="true">
+<li id="li1">(尚未记录）</li>
+<li id="li2">(尚未记录）</li>
+<li id="li3">(尚未记录）</li>
+<li id="li4">(尚未记录）</li>
+<li id="li5">(尚未记录）</li>
+</ul>
+</div> 
+</body> 
+</html>

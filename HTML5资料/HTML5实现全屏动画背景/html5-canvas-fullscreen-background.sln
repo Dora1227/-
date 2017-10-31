@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "html5-canvas-fullscreen-background", "http://localhost:4336", "{14D268E2-1609-48C9-A6A7-B4B0411276D3}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4336"
+		Debug.AspNetCompiler.PhysicalPath = "html5-canvas-fullscreen-background\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4336\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4336"
+		Release.AspNetCompiler.PhysicalPath = "html5-canvas-fullscreen-background\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4336\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "html5-canvas-fullscreen-background\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14D268E2-1609-48C9-A6A7-B4B0411276D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D268E2-1609-48C9-A6A7-B4B0411276D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

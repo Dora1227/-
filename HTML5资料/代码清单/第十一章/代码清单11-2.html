@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>   
+<head>   
+<meta charset="UTF-8">  
+<title>使用RGraph插件制作柱状图</title>  
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.bar.js"></script>
+<script>
+//指定颜色数组，用于变换颜色
+var color=new Array;
+color[0]='red';
+color[1]='green';
+color[2]='blue';
+function window_onload()
+{
+    //绘制柱状图，指定数据
+    myGraph = new RGraph.Bar('myCanvas',[1200,1300,1400,1500,3000,1900,2000,2100,
+    2500,2700,1400,2600]);
+   //指定统计图标题
+    myGraph.Set('chart.title','2010年常州第一百货公司长虹彩电销售图');
+    //指定X轴标题
+    myGraph.Set('chart.title.xaxis','销售月份');
+    //指定Y轴标题
+    myGraph.Set('chart.title.yaxis','销售台数');
+    //指定X轴的坐标轴文字
+    myGraph.Set('chart.labels',['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月',
+    '11月','12月']);
+    //指定Y轴的坐标轴文字
+    myGraph.Set('chart.ylabels.specific',['3000','2500','2000','1500','1000','500']);
+    //指定在坐标轴顶部绘制说明销售数量的文字
+    myGraph.Set('chart.labels.above', true);
+    //指定网格自动与坐标轴单位对齐    
+    myGraph.Set('chart.background.grid.autofit', true);
+    myGraph.Set('chart.background.grid.autofit.align', true);
+    //指定标签文字所使用的空间尺寸
+    myGraph.Set('chart.gutter',65);
+    //绘制柱状图
+    myGraph.Draw(); 
+    //注册控件
+    RGraph.Register(myGraph);
+    var i=0;//填充时使用颜色的颜色序号
+    myGraph.canvas.onclick = function (e)
+    {
+        RGraph.Redraw();//重绘统计图
+    
+        var canvas  = e.target;//获取被点击的canvas元素
+        var context = canvas.getContext('2d');//获取该canvas元素的图形上下文对象
+        var obj     = canvas.__object__;//获取统计图对象
+        var coords  = obj.getBar(e);//获取被点击的柱子信息
+        
+        if (coords) {
+            var top    = coords[1];//获取被点击柱子的X轴上的坐标起点
+            var left   = coords[2];//获取被点击柱子的Y轴上的坐标起点
+            var width  = coords[3];//获取被点击柱子的宽度
+            var height = coords[4];//获取被点击柱子的高度
+            
+            context.beginPath();//开始创建路径
+            context.strokeStyle = 'black';//指定柱子的边框颜色
+            context.fillStyle =color[i%3];//指定柱子的填充颜色
+            i+=1;//指定下次使用颜色的颜色编号
+            context.strokeRect(top, left, width, height);//绘制柱子边框
+            context.fillRect(top, left, width, height);//填充柱子
+        }
+    }
+}
+</script>
+</head>  
+<body onload="window_onload()">  
+<h1>使用RGraph插件制作柱状图</h1>  
+<canvas id="myCanvas" width="700" height="400">
+     [您的浏览器不支持canvas元素]
+</canvas>
+</body>  
+</html> 
