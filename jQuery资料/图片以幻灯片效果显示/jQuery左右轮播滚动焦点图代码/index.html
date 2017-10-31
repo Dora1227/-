@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>jQuery左右轮播焦点图特效 - 素材家园</title> 
+<style>
+*{margin:0;padding:0;}
+</style>
+<link rel="stylesheet" type="text/css" href="css/sucaijiayuan.css" /> 
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="js/slide.js"></script> 
+<script type="text/javascript"> 
+	$(document).ready(function(){	
+		$('#slides').slides({
+			preload: true,
+			preloadImage: 'images/ajax-loader.gif',
+			effect: 'slide',
+			play: 5000,
+			pause: 2500,
+			hoverPause: true,
+			animationStart: function(current){
+				$('.caption').animate({
+					bottom:0,
+					right: 40,
+					opacity: 0
+				},200);
+			},
+			animationComplete: function(current){
+				$('.caption').animate({
+					bottom:20,
+					right: 40,
+					opacity: 1
+				},200);
+			},
+			slidesLoaded: function() {
+				$('.caption').animate({
+					bottom:20,
+					right: 40,
+					opacity: 1
+				},200);
+			}
+		});  
+	});
+</script>  
+</head> 
+<body> 
+<div class="ca1_slide" style="padding-left:350px;"> 
+	<div id="slider-wrapper"> 
+		<div id="slider-bg">				
+				<div id="slider-photos"> 
+					<div id="slides"> 
+						<div class="slides_container"> 						 
+							 
+			<div class="slide"> 
+               <img src="images/11111.jpg" width="700" height="300" alt="第十八届全国大学生网球锦标赛暨全国高校“校长杯”网球比赛开幕"/> 
+               <div class="caption" style="bottom:0"> 
+                <h1><a href="http://www.sucaijiayuan.com" style="text-decoration:none;font-size:12px;">第十八届全国大学生网球锦标赛暨全国高校“校长杯”网球比赛开幕</a></h1> 
+              </div> 
+            </div> 
+                                                                                                                                                                        <div class="slide"> 
+                  <img src="images/big1.jpg" width="700" height="300" alt="第十三届全国大学生田径锦标赛开幕 人大学子男子百米专业组夺冠"/> 
+                <div class="caption" style="bottom:0"> 
+                  <h1><a href="http://www.sucaijiayuan.com" style="text-decoration:none;font-size:12px;">第十三届全国大学生田径锦标赛开幕 人大学子男子百米专业组夺冠</a></h1> 
+                 </div> 
+			</div> 
+			<div class="slide"> 
+			<img src="images/777.jpg" width="700" height="300" alt=""/> 
+			  <div class="caption" style="bottom:0"> 
+				<h1><a href="http://www.sucaijiayuan.com" style="text-decoration:none;font-size:12px;">新闻学院开展赴山东诸城、湖南中方“新闻学子走基层”学习实践活动</a></h1> 
+				</div> 
+         </div> 
+                                                                                                                                                                     <div class="slide"> 
+              <img src="images/22.jpg" width="700" height="300" alt="人大成立中国共产党历史与理论研究院 9名专家受聘任学术顾问"/> 
+            <div class="caption" style="bottom:0"> 
+               <h1><a href="http://www.sucaijiayuan.com" style="text-decoration:none;font-size:12px;">人大成立中国共产党历史与理论研究院 9名专家受聘任学术顾问</a></h1> 
+            </div> 
+        </div> 
+          </div>	
+            <a href="http://www.sucaijiayuan.com" class="prev"><img src="images/arrow-prev.png" width="30" height="70" alt="Arrow Prev" border="0"></a> 
+            <a href="http://www.sucaijiayuan.com" class="next"><img src="images/arrow-next.png" width="30" height="70" alt="Arrow Next" border="0"></a>								
+		</div> 
+	</div> 
+	</div> 
+</div> 
+</div> 
+</body> 
+</html>
